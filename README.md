@@ -1,10 +1,7 @@
-<<<<<<< HEAD
+
 # Movie Virtual Assistant 
 ## Project Description:
-=======
-# daASSISTANT
-Project Description:
->>>>>>> 270572ff0175d0d6a5c75af0deb4aef1c1602006
+
 A virtual assistant that allows for customers to book/change/cancel new or current movie ticket bookings, as well as allow users to purchase add-ons such as food, drinks, and movie collectibles.
 
 ## Class Organization:
