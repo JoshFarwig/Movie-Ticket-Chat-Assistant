@@ -14,3 +14,5 @@ Contains the buy and cancel methods for MovieTicket
 Contains ticketID, what movie it’s for, number of people, names of said people, etc
 ### **Customer:**
 Contains customer name, customerID, gender, birthDate, e-mail, favorite movie
+### **Seats:**
+Contains a boolean (isReserved) as well as an array containing all seats and their status
