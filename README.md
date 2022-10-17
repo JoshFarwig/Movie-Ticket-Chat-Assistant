@@ -1,4 +1,4 @@
-# daBOT
+# daASSISTANT
 Project Description:
 A virtual assistant that allows for customers to book/change/cancel new or current movie ticket bookings, as well as allow users to purchase add-ons such as food, drinks, and movie collectibles.
 Class Organization:
