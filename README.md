@@ -1,7 +1,8 @@
-# daBOT
-Project Description:
+# Movie Virtual Assistant 
+## Project Description:
 A virtual assistant that allows for customers to book/change/cancel new or current movie ticket bookings, as well as allow users to purchase add-ons such as food, drinks, and movie collectibles.
-Class Organization:
+
+## Class Organization:
 - Movie:
     - Contains variables that reference the movie such as name, actors, genre, etc
 - AddOn (Interface)
