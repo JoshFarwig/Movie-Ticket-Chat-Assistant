@@ -6,7 +6,11 @@ public class Movie {
 	private Calendar releaseDate; // Contains the release date of the movie
 	private String[] starring; // Contains the main actors of this movie (2)
 	private Calendar endShowTime; // Last time this movie shows at the theater
-	private Calendar premiereTime; // First time this movie shows at theater
+	private Calendar premiereTime; // First time this movie shows at theater 
+
+	// Class constructor 
+
+	public Movie(String movieName, String genre, Calender releaseDate, String[] starring, Calender endShowTime, Calender premierTime, )
 
 	// Setters & Getters
 	public String getMovieName() {
