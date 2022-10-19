@@ -9,9 +9,9 @@ public class Pathways {
     // Intializing Temporary Customer Storage Array
     // intializing MovieTicket Storage Array
 
-    public static int main(String[] args) { 
+    public static void main(String[] args) { 
 
-
+        
 
     }
 

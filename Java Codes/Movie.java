@@ -10,7 +10,10 @@ public class Movie {
 
 	// Class constructor 
 
-	public Movie(String movieName, String genre, Calender releaseDate, String[] starring, Calender endShowTime, Calender premierTime, )
+	public Movie(String movieName, String genre, Calendar releaseDate, String[] starring, Calendar endShowTime, Calendar premierTime ){
+
+		
+	}
 
 	// Setters & Getters
 	public String getMovieName() {
