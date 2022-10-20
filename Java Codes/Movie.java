@@ -105,13 +105,13 @@ public class Movie {
 	public String chooseSeat(String seatID) {
 		for(int i = 0; i < allSeats.length; i++) { 
 			for(int j = 0; j < allSeats[0].length; j++) { 
-				if(allSeats[i][j].getSeatID().compareTo(seatID) == 0) { 
+				if(allSeats[i][j].getSeatID().compareToIgnoreCase(seatID) == 0) { 
 					allSeats[i][j].setIsTaken(true); 
 					return allSeats[i][j].getSeatID(); 
 				}
 			}
 		}  
-		return "a Non-Existent Seat or a Taken Seat, please try again";
+		return "Non-Existent Seat or a Taken Seat";
 
 	}
 	

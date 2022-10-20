@@ -83,16 +83,21 @@ public class Pathways {
                 custMovie = allMovies.get(mov-1);
     	   }
         } 
-        // functionality of selecting seats
-        custMovie.allSeatsToString();
-        System.out.println("Select your seat: "); 
-        String custSeat = sc.nextLine(); 
-        String selectedSeat = custMovie.chooseSeat(custSeat);  
-        boolean isFalse = true;
-        while(isFalse) { 
+       
+       
+       
+       
+        // functionality of selecting seats (NOT WORKING)
+       sc.nextLine(); 
+        custMovie.allSeatsToString();	//displays all seats
+        System.out.print("Select your seat: "); //asks for user input
+        String custSeat = sc.nextLine(); 		// saves user input in custSeat
+        String selectedSeat = custMovie.chooseSeat(custSeat);  //checking validity of seat ??? @Josh -zee
+        boolean seatValid = true;
+        while(seatValid) { 
             if(selectedSeat.compareTo(custSeat) == 0) { 
                 System.out.println("Your selected seat is: " + selectedSeat);
-                isFalse = false;
+                seatValid= false;
             } 
             else {  
                 System.out.println("You have Selected:" + selectedSeat); 
@@ -125,7 +130,7 @@ public class Pathways {
     	System.out.println("Booking Information");
     	System.out.println("\tMovie Name: " + movieName);
     	System.out.println("\tMovie Time: " + movieTime);
-        System.out.println("\tYour Seat:" + customerSeat);
+        System.out.println("\tYour Selected Seat: " + customerSeat);
 
     }
 
