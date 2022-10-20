@@ -44,7 +44,7 @@ public class MovieTicket {
     } 
 
     public void setRelatedSeat(Seat relatedSeat) { 
-        this.relatedSeat = relatedSear
+        this.relatedSeat = relatedSeat;
     }
 
 

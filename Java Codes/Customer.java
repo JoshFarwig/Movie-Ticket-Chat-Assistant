@@ -32,7 +32,7 @@ public class Customer {
         this.name = name;         
     }
     
-    public String getGender() { 
+    public char getGender() { 
         return this.gender; 
     } 
     

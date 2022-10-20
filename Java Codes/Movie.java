@@ -3,20 +3,20 @@ import java.util.*;
 public class Movie {
 	private String movieName; // Contains name of the movie
 	private String genre; // Contains the genre
-	private Calendar releaseDate; // Contains the release date of the movie
+	private String releaseDate; // Contains the release date of the movie
 	private String[] starring; // Contains the main actors of this movie (2)
-	private Calendar endShowTime; // Last time this movie shows at the theater
-	private Calendar premiereTime; // First time this movie shows at theater 
-	private Calendar showTime;
+	private String movieDuration; // movie duration
+	private String premiereTime; // First time this movie shows at theater 
+	private String showTime;
 
 	// Class constructor 
 
-	public Movie(String movieName, String genre, Calendar releaseDate, String[] starring, Calendar endShowTime, Calendar premierTime ){
+	public Movie(String movieName, String genre, String releaseDate, String[] starring, Calendar endShowTime, Calendar premierTime ){
 
 		
 	}
 
-	public Movie(String movieName, Calendar showTime, Calendar releaseDate){
+	public Movie(String movieName, String showTime, String releaseDate){
 		this.movieName=movieName;
 		this.showTime=showTime;
 		this.releaseDate=releaseDate;
@@ -39,11 +39,11 @@ public class Movie {
 		this.genre = genre;
 	}
 
-	public Calendar getReleaseDate() {
+	public String getReleaseDate() {
 		return releaseDate;
 	}
 
-	public void setReleaseDate(Calendar releaseDate) {
+	public void setReleaseDate(String releaseDate) {
 		this.releaseDate = releaseDate;
 	}
 
@@ -55,27 +55,27 @@ public class Movie {
 		this.starring = starring;
 	}
 
-	public Calendar getEndShowTime() {
-		return endShowTime;
+	public String getmovieDuration() {
+		return movieDuration;
 	}
 
-	public void setEndShowTime(Calendar endShowTime) {
-		this.endShowTime = endShowTime;
+	public void setMovieDuration(String movieDuration) {
+		this.movieDuration = movieDuration;
 	}
 
-	public Calendar getPremiereTime() {
+	public String getPremiereTime() {
 		return premiereTime;
 	}
 
-	public void setPremiereTime(Calendar premiereTime) {
+	public void setPremiereTime(String premiereTime) {
 		this.premiereTime = premiereTime;
 	}
 
-    public Calendar getShowTime() {
+    public String getShowTime() {
         return showTime;
     }
 
-    public void setShowTime(Calendar showTime) {
+    public void setShowTime(String showTime) {
         this.showTime = showTime;
     }
 
