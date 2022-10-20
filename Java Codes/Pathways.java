@@ -35,7 +35,8 @@ public class Pathways {
 
 		if (sel == 1) {
 			System.out.println("Input your email: ");
-			email = sc.next();
+			email = sc.next(); 
+			sc.nextLine(); 
 
 			/*
 			 * Checking if customer is existing, if yes then print welcome back and save
@@ -50,9 +51,10 @@ public class Pathways {
 				} else {
 					System.out.println("Welcome");
 					System.out.print("Please enter your name: ");
-					custName = sc.next();
+					custName = sc.nextLine(); 
 					System.out.println("Please enter your gender: (M/F)");
-					custGender = sc.next().charAt(0);
+					custGender = sc.next().charAt(0); 
+					sc.nextLine();
 					customers.add((new Customer(custName, 0, custGender, null, email)));
 					break;
 				}
