@@ -7,13 +7,13 @@ public class Customer {
 
     private String name; // Name of Customer
     private int customerID; // ID of Customer
-    private String gender; // Gender of Customer
+    private char gender; // Gender of Customer
     private Calendar birthDate; // BirthDate of Customer
     private String email; // email of Customer 
 
     // class constructor
 
-    public Customer(String name, int customerID, String gender, Calendar birthDate, String email) {
+    public Customer(String name, int customerID, char gender, Calendar birthDate, String email) {
         this.name = name; 
         this.customerID = customerID;
         this.gender = gender; 
@@ -36,7 +36,7 @@ public class Customer {
         return this.gender; 
     } 
     
-    public void setGender(String gender) { 
+    public void setGender(char gender) { 
         this.gender = gender; 
     } 
 
