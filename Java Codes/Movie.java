@@ -7,6 +7,7 @@ public class Movie {
 	private String[] starring; // Contains the main actors of this movie (2)
 	private Calendar endShowTime; // Last time this movie shows at the theater
 	private Calendar premiereTime; // First time this movie shows at theater 
+	private Calendar showTime;
 
 	// Class constructor 
 
@@ -15,6 +16,12 @@ public class Movie {
 		
 	}
 
+	public Movie(String movieName, Calendar showTime, Calendar releaseDate){
+		this.movieName=movieName;
+		this.showTime=showTime;
+		this.releaseDate=releaseDate;
+
+	}
 	// Setters & Getters
 	public String getMovieName() {
 		return movieName;
@@ -63,5 +70,13 @@ public class Movie {
 	public void setPremiereTime(Calendar premiereTime) {
 		this.premiereTime = premiereTime;
 	}
+
+    public Calendar getShowTime() {
+        return showTime;
+    }
+
+    public void setShowTime(Calendar showTime) {
+        this.showTime = showTime;
+    }
 
 }

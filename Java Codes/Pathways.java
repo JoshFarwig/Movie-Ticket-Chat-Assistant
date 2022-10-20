@@ -1,7 +1,13 @@
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Pathways { 
-    // Intializing Movies 
+    // Intializing Movies
+    ArrayList<Object> allMovies = new ArrayList<Object>(){
+        {
+        add(new Movie("Black Adam", ));
+        }
+    };
     // Intializing Seats 
     Seat[][] allSeats = {{new Seat("A1", false),new Seat("A2", false), new Seat("A3", false)}, 
                          {new Seat("B1", false),new Seat("B2", false), new Seat("B3", false)}, 
