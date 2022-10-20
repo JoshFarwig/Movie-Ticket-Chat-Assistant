@@ -65,6 +65,15 @@ public class Pathways {
         for (int i = 0; i < allMovies.size(); i++) {
             System.out.println(i+1 + ". " + allMovies.get(i).getMovieName() + " ");
         }
+        int mov = sc.nextInt();
+
+        switch(mov){
+            case 1: System.out.println("Available Timings: "+ allMovies.get(mov).getShowTime()); break;
+            case 2: System.out.println("Available Timings: "+ allMovies.get(mov).getShowTime()); break;
+            case 3: System.out.println("Available Timings: "+ allMovies.get(mov).getShowTime()); break;
+        }
+        
+
         
         
 
