@@ -8,6 +8,10 @@ public class Movie {
 	private String movieDuration; // movie duration
 	private String premiereTime; // First time this movie shows at theater 
 	private String showTime;
+	private Seat[][] allSeats = {{new Seat("A1", false),new Seat("A2", false), new Seat("A3", false)}, 
+							   {new Seat("B1", false),new Seat("B2", false), new Seat("B3", false)}, 
+							   {new Seat("C1", false),new Seat("C2", false), new Seat("C3", false)},
+							   {new Seat("D1", false),new Seat("D2", false), new Seat("D3", false)}}; // Array of all Seats in Movie
 
 	// Class constructor 
 
@@ -71,12 +75,33 @@ public class Movie {
 		this.premiereTime = premiereTime;
 	}
 
-    public String getShowTime() {
-        return showTime;
-    }
+        public String getShowTime() {
+               return showTime;
+        }
 
-    public void setShowTime(String showTime) {
-        this.showTime = showTime;
-    }
+        public void setShowTime(String showTime) {
+               this.showTime = showTime;
+        }  
+	
+	public Seat[][] getAllSeats() { 
+		return allSeats; 
+	} 
+
+	public void setAllSeats(Seat[][] allSeats) {
+		this.allSeats = allSeats; 
+	}  
+	
+	public void allSeatsToString() { //toString methods to print out all Available seats
+		for(int i = 0; i < 4; i++) {   
+			for(int j = 0; j < 4; j++) {   
+				String temp; 
+				System.out.print("[" + allSeats[i][j].getSeatID() + " " + (temp = (allSeats[i][j].isIsTaken()) ? "X" : "O") + "]");
+			} 
+			System.out.println();
+
+		}
+	}
+	
+
 
 }
