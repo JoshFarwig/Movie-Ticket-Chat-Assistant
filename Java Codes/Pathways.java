@@ -65,13 +65,23 @@ public class Pathways {
         for (int i = 0; i < allMovies.size(); i++) {
             System.out.println(i+1 + ". " + allMovies.get(i).getMovieName() + " ");
         }
-        int mov = sc.nextInt();
+
+        boolean isValid = true;
+        while(isValid){
+            isValid = false;
+        int mov = sc.nextInt() - 1;
 
         switch(mov){
-            case 1: System.out.println("Available Timings: "+ allMovies.get(mov).getShowTime()); break;
-            case 2: System.out.println("Available Timings: "+ allMovies.get(mov).getShowTime()); break;
-            case 3: System.out.println("Available Timings: "+ allMovies.get(mov).getShowTime()); break;
+            case 0: System.out.println("Available Timings: "+allMovies.get(mov).getReleaseDate() +" "+  allMovies.get(mov).getShowTime()); break;
+            case 1: System.out.println("Available Timings: "+allMovies.get(mov).getReleaseDate() +" "+  allMovies.get(mov).getShowTime()); break;
+            case 2: System.out.println("Available Timings: "+allMovies.get(mov).getReleaseDate() +" "+  allMovies.get(mov).getShowTime()); break;
+            default: System.out.print("Invalid input. Please try again: "); isValid = true;  
         }
+    }
+
+        System.out.println("Select your seat: ");
+        String seat = "";
+
         
 
         
