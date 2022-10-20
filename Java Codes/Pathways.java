@@ -4,7 +4,7 @@ import java.util.Scanner;
 
 public class Pathways { 
     // Intializing Movies
-    ArrayList<Object> allMovies = new ArrayList<Object>(){
+    static ArrayList<Movie> allMovies = new ArrayList<Movie>(){
         {
         add(new Movie("Black Adam", new GregorianCalendar(2022,10,20), new GregorianCalendar(2022,9,22)));
         add(new Movie("Smile", new GregorianCalendar(2022,6,5), new GregorianCalendar(2022,5,9)));
@@ -61,6 +61,10 @@ public class Pathways {
         	}
         	
         }}
+        System.out.println("Select a movie: ");
+        for (int i = 0; i < allMovies.size(); i++) {
+            System.out.println(i+1 + ". " + allMovies.get(i).getMovieName() + " ");
+        }
         
         
 
