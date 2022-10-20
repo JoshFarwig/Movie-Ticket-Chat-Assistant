@@ -102,16 +102,16 @@ public class Movie {
 		}
 	} 
 	// method to locate a seat with sameID user inputed, if not return an invalid statement
-	public String chooseSeat(String seatID) {
+	public boolean chooseSeat(String seatID) {
 		for(int i = 0; i < allSeats.length; i++) { 
 			for(int j = 0; j < allSeats[0].length; j++) { 
 				if(allSeats[i][j].getSeatID().compareToIgnoreCase(seatID) == 0) { 
 					allSeats[i][j].setIsTaken(true); 
-					return allSeats[i][j].getSeatID(); 
+					return true; 
 				}
 			}
 		}  
-		return "Non-Existent Seat or a Taken Seat";
+		return false;
 
 	}
 	
