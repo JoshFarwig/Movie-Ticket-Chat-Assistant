@@ -6,9 +6,9 @@ public class Pathways {
     // Intializing Movies
     static ArrayList<Movie> allMovies = new ArrayList<Movie>(){
         {
-        add(new Movie("Black Adam", new GregorianCalendar(2022,10,20), new GregorianCalendar(2022,9,22)));
-        add(new Movie("Smile", new GregorianCalendar(2022,6,5), new GregorianCalendar(2022,5,9)));
-        add(new Movie("Thor", new GregorianCalendar(2022,8,16), new GregorianCalendar(2022,7,10)));
+        add(new Movie("Black Adam", "9:30pm", "September 14, 2022"));
+        add(new Movie("Smile", "7:15pm", "May 29, 2022"));
+        add(new Movie("Thor", "8:45pm", "October 14, 2022"));
         }
     };
     // Intializing Seats 
