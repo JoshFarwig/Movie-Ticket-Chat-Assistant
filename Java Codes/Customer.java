@@ -21,7 +21,40 @@ public class Customer {
         this.email = email; 
     } 
 
-    // other Methods 
+    // other Methods  
+    
+    // Getters and Setters 
+    public String getName(){ 
+        return this.name; 
+    }  
+
+    public void setName(String name) { 
+        this.name = name;         
+    }
+    
+    public String getGender() { 
+        return this.gender; 
+    } 
+    
+    public void setGender(String gender) { 
+        this.gender = gender; 
+    } 
+
+    public String getEmail() { 
+        return this.email; 
+    } 
+
+    public void setEmail(String email) { 
+        this.email = email; 
+    }  
+
+    public Calendar getBirthDate() { 
+        return this.birthDate; 
+    }
+
+    public void setBirthDate(Calendar birthDate) { 
+        this.birthDate = birthDate; 
+    }
         
 
 
