@@ -1,3 +1,4 @@
+import java.util.Scanner;
 
 public class Pathways { 
     // Intializing Movies 
@@ -11,7 +12,19 @@ public class Pathways {
 
     public static void main(String[] args) { 
 
-        
+        System.out.println("Hello. How may I help you?");
+        System.out.println("1. Book a Ticket \n2. Amend your booking \n3. Cancel your booking");
+
+        Scanner sc = new Scanner(System.in);  
+        int sel = sc.nextInt();
+   
+        if (sel == 1){
+            System.out.println("Input your email: ");
+            String email = sc. next(); 
+            
+        }
+
+
 
     }
 
