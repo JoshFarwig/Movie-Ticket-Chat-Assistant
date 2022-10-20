@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.GregorianCalendar;
 import java.util.Scanner;
 
 public class Pathways { 
@@ -16,8 +17,11 @@ public class Pathways {
                          {new Seat("C1", false),new Seat("C2", false), new Seat("C3", false)}, 
                          {new Seat("D1", false),new Seat("D2", false), new Seat("D3", false)}};
     // Intializing Temporary Customer Storage Array
-    	// PLEASE NAME THIS ARRAY "customers" - Zee
-    
+    	static ArrayList<Customer> customers = new ArrayList<Customer>(){
+            {
+            add(new Customer("Zeyad", 1234, 'M', null, "zee@gmail.com"));
+            }
+        };
     // intializing MovieTicket Storage Array
 
     public static void main(String[] args) { 
@@ -27,7 +31,7 @@ public class Pathways {
 
         Scanner sc = new Scanner(System.in);  
         int sel = sc.nextInt();
-        String email;
+        String email="";
         int existingCustomerIdx;
         String custName;
         char custGender;
@@ -41,7 +45,7 @@ public class Pathways {
         /*Checking if customer is existing, if yes then print welcome back and save
         * index of this customer so we can create ticket
         */
-        for(int i = 0; i < customers.size; i++ ) {
+        for(int i = 0; i < customers.size(); i++ ) {
         	if(customers.get(i).getEmail().compareTo(email) == 0) {
         		System.out.println("Welcome back!");
         		existingCustomerIdx = i;
@@ -52,7 +56,7 @@ public class Pathways {
         	custName = sc.nextLine();
         	System.out.println("Please enter your gender: (M/F)");
         	custGender = sc.nextLine().charAt(0);
-        	customers.add(custName,custGender, email);
+        	customers.add((new Customer(custName, 0, custGender, null, email)));
         	}
         	
         }
