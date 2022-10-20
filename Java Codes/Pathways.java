@@ -65,36 +65,51 @@ public class Pathways {
             System.out.println(i+1 + ". " + allMovies.get(i).getMovieName() + " ");
         }
 
-            
-        int mov = sc.nextInt();
+        // functionality of selecting Movie
+        int mov = sc.nextInt(); 
+        Movie custMovie = allMovies.get(mov-1);
         boolean isValid = true;
        while(isValid) {            
     	   //if valid
-    	   if(mov < 4 && mov > 0) {
-    		   movieName = allMovies.get(mov-1).getMovieName();    
-    	        movieTime = allMovies.get(mov-1).getReleaseDate() + " " + allMovies.get(mov-1).getShowTime();
+    	   if(mov < allMovies.size() && mov > 0) {   
+    		    movieName = custMovie.getMovieName();    
+    	        movieTime = custMovie.getReleaseDate() + " " + custMovie.getShowTime();
     	        System.out.println("Available Timings: " + movieTime);
     	        isValid = false;
     	   }
     	   else {
     		   System.out.print("Invalid Input. Please try again: ");
-    	        mov = sc.nextInt();
+    	        mov = sc.nextInt(); 
+                custMovie = allMovies.get(mov-1);
     	   }
+        } 
+        // functionality of selecting seats
+        custMovie.allSeatsToString();
+        System.out.println("Select your seat: "); 
+        String custSeat = sc.nextLine(); 
+        String selectedSeat = custMovie.chooseSeat(custSeat);  
+        boolean isFalse = true;
+        while(isFalse) { 
+            if(selectedSeat.compareTo(custSeat) == 0) { 
+                System.out.println("Your selected seat is: " + selectedSeat);
+                isFalse = false;
+            } 
+            else {  
+                System.out.println("You have Selected:" + selectedSeat); 
+                custSeat = sc.nextLine(); 
+                selectedSeat = custMovie.chooseSeat(custSeat);
+            }
+
         }
-
-        System.out.println("Select your seat: ");
-        String seat = "";
         
-        getSummary(custName, email, custGender, movieName, movieTime);
+        getSummary(custName, email, custGender, movieName, movieTime, selectedSeat);
         
 
         
-        
-
-
+    
     }
     
-    public static void getSummary(String name, String email, char gender, String movieName, String movieTime) {
+    public static void getSummary(String name, String email, char gender, String movieName, String movieTime, String customerSeat) {
     	int ticketId = (int)((Math.random() * 10000) + 100);
     	System.out.println();
     	System.out.println();
@@ -110,8 +125,8 @@ public class Pathways {
     	System.out.println("Booking Information");
     	System.out.println("\tMovie Name: " + movieName);
     	System.out.println("\tMovie Time: " + movieTime);
-    	
-    	
+        System.out.println("\tYour Seat:" + customerSeat);
+
     }
 
 

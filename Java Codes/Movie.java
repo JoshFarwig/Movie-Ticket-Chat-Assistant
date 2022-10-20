@@ -92,14 +92,27 @@ public class Movie {
 	}  
 	
 	public void allSeatsToString() { //toString methods to print out all Available seats
-		for(int i = 0; i < 4; i++) {   
-			for(int j = 0; j < 4; j++) {   
+		for(int i = 0; i < allSeats.length; i++) {   
+			for(int j = 0; j < allSeats[0].length; j++) {   
 				String temp; 
 				System.out.print("[" + allSeats[i][j].getSeatID() + " " + (temp = (allSeats[i][j].isIsTaken()) ? "X" : "O") + "]");
 			} 
 			System.out.println();
 
 		}
+	} 
+	// method to locate a seat with sameID user inputed, if not return an invalid statement
+	public String chooseSeat(String seatID) {
+		for(int i = 0; i < allSeats.length; i++) { 
+			for(int j = 0; j < allSeats[0].length; j++) { 
+				if(allSeats[i][j].getSeatID().compareTo(seatID) == 0) { 
+					allSeats[i][j].setIsTaken(true); 
+					return allSeats[i][j].getSeatID(); 
+				}
+			}
+		}  
+		return "a Non-Existent Seat or a Taken Seat, please try again";
+
 	}
 	
 
