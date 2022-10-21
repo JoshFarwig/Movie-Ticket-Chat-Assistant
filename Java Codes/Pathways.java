@@ -85,7 +85,7 @@ public class Pathways {
 						}
 					}
 
-					// functionality of selecting seats (NOT WORKING)
+					// functionality of selecting seats
 					sc.nextLine();
 					custMovie.allSeatsToString(); // displays all seats
 					System.out.print("Select your seat: "); // asks for user input
@@ -115,7 +115,16 @@ public class Pathways {
 						custMovie.cancelSeat(custSeat);
 						continue;
 					}
-				} break;
+				} break; 
+			case 2: { 
+				System.out.println("Feature not implemented yet"); 
+				continue; 
+			} 
+
+			case 3: { 
+				System.out.println("Feature not implemented yet"); 
+				continue;
+			}
 			}
 
 		}
