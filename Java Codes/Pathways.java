@@ -20,90 +20,105 @@ public class Pathways {
 	// intializing MovieTicket Storage Array
 
 	public static void main(String[] args) {
+		boolean checked = true;
+		while(checked){
+			System.out.println("Hello. How may I help you?");
+			System.out.println("1. Book a Ticket \n2. Amend your booking \n3. Cancel your booking");
 
-		System.out.println("Hello. How may I help you?");
-		System.out.println("1. Book a Ticket \n2. Amend your booking \n3. Cancel your booking");
+			Scanner sc = new Scanner(System.in);
+			int sel = sc.nextInt();
+			String email = "";
+			int existingCustomerIdx;
+			String custName = null;
+			char custGender = 0;
+			String movieName = null;
+			String movieTime = null;
 
-		Scanner sc = new Scanner(System.in);
-		int sel = sc.nextInt();
-		String email = "";
-		int existingCustomerIdx;
-		String custName = null;
-		char custGender = 0;
-		String movieName = null;
-		String movieTime = null;
+			switch(sel) {
+				case 1: {
+						System.out.println("Input your email: ");
+						email = sc.next(); 
+						sc.nextLine(); 
 
-		if (sel == 1) {
-			System.out.println("Input your email: ");
-			email = sc.next(); 
-			sc.nextLine(); 
+						/*
+						* Checking if customer is existing, if yes then print welcome back and save
+						* index of this customer so we can create ticket
+						*/
+						for (int i = 0; i < customers.size(); i++) {
+							if (customers.get(i).getEmail().compareTo(email) == 0) {
+								System.out.println("Welcome back!");
+								custName = customers.get(i).getName();
+								custGender = customers.get(i).getGender();
+								existingCustomerIdx = i;
+							} else {
+								System.out.println("Welcome");
+								System.out.print("Please enter your name: ");
+								custName = sc.nextLine(); 
+								System.out.println("Please enter your gender: (M/F)");
+								custGender = sc.next().charAt(0); 
+								sc.nextLine();
+								customers.add((new Customer(custName, 0, custGender, null, email)));
+								break;
+							}
 
-			/*
-			 * Checking if customer is existing, if yes then print welcome back and save
-			 * index of this customer so we can create ticket
-			 */
-			for (int i = 0; i < customers.size(); i++) {
-				if (customers.get(i).getEmail().compareTo(email) == 0) {
-					System.out.println("Welcome back!");
-					custName = customers.get(i).getName();
-					custGender = customers.get(i).getGender();
-					existingCustomerIdx = i;
-				} else {
-					System.out.println("Welcome");
-					System.out.print("Please enter your name: ");
-					custName = sc.nextLine(); 
-					System.out.println("Please enter your gender: (M/F)");
-					custGender = sc.next().charAt(0); 
+						}
+					System.out.println("Select a movie: ");
+					for (int i = 0; i < allMovies.size(); i++) {
+						System.out.println(i + 1 + ". " + allMovies.get(i).getMovieName() + " ");
+					}
+
+					// functionality of selecting Movie
+					int mov = sc.nextInt();
+					Movie custMovie = allMovies.get(mov - 1);
+					boolean isValid = true;
+					while (isValid) {
+						// if valid
+						if (mov < allMovies.size() && mov > 0) {
+							movieName = custMovie.getMovieName();
+							movieTime = custMovie.getReleaseDate() + " " + custMovie.getShowTime();
+							System.out.println("Available Timings: " + movieTime);
+							isValid = false;
+						} else {
+							System.out.print("Invalid Input. Please try again: ");
+							mov = sc.nextInt();
+							custMovie = allMovies.get(mov - 1);
+						}
+					}
+
+					// functionality of selecting seats (NOT WORKING)
 					sc.nextLine();
-					customers.add((new Customer(custName, 0, custGender, null, email)));
-					break;
-				}
+					custMovie.allSeatsToString(); // displays all seats
+					System.out.print("Select your seat: "); // asks for user input
+					String custSeat = sc.nextLine(); // saves user input in custSeat
+					custMovie.ifSeatExist(custSeat); // checking validity of seat ??? @Josh -zee
+					boolean seatValid = custMovie.ifSeatExist(custSeat);
+					while (!seatValid) {
+						
+						System.out.println("Invalid or Taken Seat. Please Try Again: ");
+						custSeat = sc.nextLine();
+						seatValid = custMovie.ifSeatExist(custSeat);
 
+					}
+
+					System.out.println("Your selected seat is: " + custSeat);
+					seatValid = false;
+
+					getSummary(custName, email, custGender, movieName, movieTime, custSeat.toUpperCase());
+
+					System.out.println("Would you to continue or cancel");
+					String confirm = sc.next().toLowerCase();
+					if(confirm.equals("continue")){
+						System.out.println("Redirecting to payment...");
+						checked=false; 
+					}		
+					else{
+						custMovie.cancelSeat(custSeat);
+						continue;
+					}
+				} break;
 			}
-		}
-		System.out.println("Select a movie: ");
-		for (int i = 0; i < allMovies.size(); i++) {
-			System.out.println(i + 1 + ". " + allMovies.get(i).getMovieName() + " ");
-		}
-
-		// functionality of selecting Movie
-		int mov = sc.nextInt();
-		Movie custMovie = allMovies.get(mov - 1);
-		boolean isValid = true;
-		while (isValid) {
-			// if valid
-			if (mov < allMovies.size() && mov > 0) {
-				movieName = custMovie.getMovieName();
-				movieTime = custMovie.getReleaseDate() + " " + custMovie.getShowTime();
-				System.out.println("Available Timings: " + movieTime);
-				isValid = false;
-			} else {
-				System.out.print("Invalid Input. Please try again: ");
-				mov = sc.nextInt();
-				custMovie = allMovies.get(mov - 1);
-			}
-		}
-
-		// functionality of selecting seats (NOT WORKING)
-		sc.nextLine();
-		custMovie.allSeatsToString(); // displays all seats
-		System.out.print("Select your seat: "); // asks for user input
-		String custSeat = sc.nextLine(); // saves user input in custSeat
-		custMovie.chooseSeat(custSeat); // checking validity of seat ??? @Josh -zee
-		boolean seatValid = custMovie.chooseSeat(custSeat);
-		while (!seatValid) {
-			
-			System.out.println("Invalid or Taken Seat. Please Try Again: ");
-			custSeat = sc.nextLine();
-			seatValid = custMovie.chooseSeat(custSeat);
 
 		}
-
-		System.out.println("Your selected seat is: " + custSeat);
-		seatValid = false;
-
-		getSummary(custName, email, custGender, movieName, movieTime, custSeat.toUpperCase());
-
 	}
 
 	public static void getSummary(String name, String email, char gender, String movieName, String movieTime,
@@ -124,6 +139,7 @@ public class Pathways {
 		System.out.println("\tMovie Name: " + movieName);
 		System.out.println("\tMovie Time: " + movieTime);
 		System.out.println("\tYour Selected Seat: " + customerSeat);
+		
 
 	}
 
