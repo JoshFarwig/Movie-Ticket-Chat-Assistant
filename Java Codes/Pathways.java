@@ -69,11 +69,13 @@ public class Pathways {
 
 					// functionality of selecting Movie
 					int mov = sc.nextInt();
-					Movie custMovie = allMovies.get(mov - 1);
 					boolean isValid = true;
+					Movie custMovie = null;
 					while (isValid) {
 						// if valid
 						if (mov < allMovies.size() && mov > 0) {
+
+							custMovie = allMovies.get(mov-1);
 							movieName = custMovie.getMovieName();
 							movieTime = custMovie.getReleaseDate() + " " + custMovie.getShowTime();
 							System.out.println("Available Timings: " + movieTime);
