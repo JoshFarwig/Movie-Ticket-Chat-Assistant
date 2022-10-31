@@ -22,3 +22,9 @@
 ## Table 4: Seat
 - seatId {PK}
 - isTaken
+## Table 5: Add-Ons
+- addOnId {PK}
+- name
+- price
+- category
+- quantity
