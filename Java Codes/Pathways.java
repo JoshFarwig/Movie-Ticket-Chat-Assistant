@@ -18,7 +18,7 @@ public class Pathways {
 		}
 	};
 	// intializing MovieTicket Storage Array
-
+	static ArrayList<MovieTicket> ticket_array = new ArrayList<MovieTicket>();
 	public static void main(String[] args) {
 		boolean checked = true;
 		while(checked){
@@ -124,13 +124,30 @@ public class Pathways {
 			} 
 
 			case 3: { 
-				System.out.println("Feature not implemented yet"); 
-				continue;
+				System.out.println("Input your email: ");
+				email = sc.next();
+				boolean check = true;
+				while(check){
+					for (int i = 0; i < customers.size(); i++) {
+						if (customers.get(i).getEmail().compareTo(email) == 0) {
+							System.out.println("Welcome back!");
+							custName = customers.get(i).getName();
+							custGender = customers.get(i).getGender();
+							existingCustomerIdx = i;
+							check =false;
+							break;
+						}
+					System.out.println("Incorrect Email, Please check and retry: ");
+					email=sc.next();
+					}
+					
+				}
 			}
 			}
-
-		}
+		}	
 	}
+	
+	
 
 	public static void getSummary(String name, String email, char gender, String movieName, String movieTime,
 			String customerSeat) {
