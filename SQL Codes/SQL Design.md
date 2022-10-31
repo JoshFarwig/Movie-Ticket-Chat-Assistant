@@ -1,4 +1,5 @@
 # SQL Design
+![uml](uml_design.png)
 ## Table 1: Customer
 ### Attributes:
 - customerID {PK}
