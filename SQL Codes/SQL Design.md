@@ -1,4 +1,5 @@
 # SQL Design
+![uml](uml_design.png)
 ## Table 1: Customer
 ### Attributes:
 - customerID {PK}
@@ -22,3 +23,9 @@
 ## Table 4: Seat
 - seatId {PK}
 - isTaken
+## Table 5: Add-Ons
+- addOnId {PK}
+- name
+- price
+- category
+- quantity
