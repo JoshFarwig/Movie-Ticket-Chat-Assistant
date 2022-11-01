@@ -28,7 +28,6 @@ public class Pathways {
 			Scanner sc = new Scanner(System.in);
 			int sel = sc.nextInt();
 			String email = "";
-			int existingCustomerIdx;
 			String custName = null;
 			char custGender = 0;
 			String movieName = null;
@@ -49,7 +48,6 @@ public class Pathways {
 								System.out.println("Welcome back!");
 								custName = customers.get(i).getName();
 								custGender = customers.get(i).getGender();
-								existingCustomerIdx = i;
 							} else {
 								System.out.println("Welcome");
 								System.out.print("Please enter your name: ");
@@ -73,7 +71,7 @@ public class Pathways {
 					Movie custMovie = null;
 					while (isValid) {
 						// if valid
-						if (mov < allMovies.size() && mov > 0) {
+						if (mov <= allMovies.size() && mov > 0) {
 
 							custMovie = allMovies.get(mov-1);
 							movieName = custMovie.getMovieName();
@@ -119,10 +117,38 @@ public class Pathways {
 					}
 				} break; 
 			case 2: { 
-				System.out.println("Feature not implemented yet"); 
-				continue; 
-			} 
-
+				System.out.println("Enter the email used to book your ticket: "); 
+				email = sc.next();
+				boolean isValid = true;
+				while(isValid){
+					for (int i = 0; i < customers.size(); i++) {
+						if (customers.get(i).getEmail().compareTo(email) == 0) {
+						custName = customers.get(i).getName();
+						isValid = false;
+					} else {
+						System.out.println("You have entered an invalid email. Try again: ");
+						email = sc.next();
+						i=0;
+					
+					} }
+							}
+					
+		
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	}
 			case 3: { 
 				System.out.println("Feature not implemented yet"); 
 				continue;
