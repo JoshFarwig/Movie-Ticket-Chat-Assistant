@@ -1,4 +1,4 @@
-
+package A4; 
 public class AddOn {
 	private String itemName; // Name of product
 	private double price; // Product price

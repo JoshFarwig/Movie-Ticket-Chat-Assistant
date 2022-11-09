@@ -1,3 +1,5 @@
+package A4;  
+ 
 import java.util.ArrayList;
 import java.util.GregorianCalendar;
 import java.util.Scanner;
@@ -132,21 +134,6 @@ public class Pathways {
 					
 					} }
 							}
-					
-		
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 	
 	}
 			case 3: { 
