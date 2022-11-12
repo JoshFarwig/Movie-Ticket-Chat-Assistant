@@ -48,10 +48,15 @@ public class DBconnection {
     } 
 
     public void createMovieTicket(String email, String movie) {  
-        try{  
-            PreparedStatement pstmt = con.prepareStatement("INSERT INTO movieticket(cemail, mname) VALUES(?, ?)"); 
+        try{   
+            PreparedStatement getMoviecost = con.prepareStatement("SELECT cost FROM movie WHERE name = ?"); 
+            getMoviecost.setString(1, movie); 
+            ResultSet rs = getMoviecost.executeQuery();  rs.next();  
+            double cost = rs.getDouble("cost"); 
+            PreparedStatement pstmt = con.prepareStatement("INSERT INTO movieticket(cemail, mname, totalCost) VALUES(?, ?, ?)"); 
             pstmt.setString(1, email);  
-            pstmt.setString(2, movie);  
+            pstmt.setString(2, movie);   
+            pstmt.setDouble(3, cost);  
             pstmt.execute(); 
         } catch (SQLException e) {
             System.out.println(e);
@@ -99,7 +104,7 @@ public class DBconnection {
         ArrayList<String> output = new ArrayList<>(); 
         try {   
             Statement stmt = con.createStatement();   
-            ResultSet rs = stmt.executeQuery("SELECT mname, genre, releasedate, duration FROM movie");  
+            ResultSet rs = stmt.executeQuery("SELECT * FROM movie");  
             while(rs.next()) { 
                 output.add(String.format("%s, %s, %s, %s",rs.getString("mname"),rs.getString("genre"),rs.getString("releasedate"), rs.getString("duration"))); 
             } 
@@ -152,11 +157,11 @@ public class DBconnection {
         }
     }  
 
-    public ArrayList<String> showAllAddons(){ 
+   /*public ArrayList<String> showAllAddons(){ 
         ArrayList<String> output = new ArrayList<>();  
         try {   
             PreparedStatement pstmt = con.prepareStatement("SELECT srowcol FROM seat WHERE cemail IS NULL and mname = ?");   
-            pstmt.setString(1, movie);
+            pstmt.setString(1,);
             ResultSet rs = pstmt.executeQuery(); 
             while(rs.next()) { 
                 output.add(String.format("%s",rs.getString("srowcol"))); 
@@ -187,5 +192,6 @@ public class DBconnection {
     public void printTicketSummary(){
 
     }
+    */
     
 }
