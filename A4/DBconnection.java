@@ -44,7 +44,31 @@ public class DBconnection {
         } catch (SQLException e) {
             System.out.println(e);
         }
-    } 
+    }  
+    
+    public String getCustGender(String email) { 
+        try{ 
+            PreparedStatement pstmt = con.prepareStatement("SELECT gender FROM customer WHERE email = ?"); 
+            pstmt.setString(1, email); 
+            ResultSet rs = rs.executeQuery(); rs.next(); 
+            return rs.getString("gender");
+        } catch (SQLException e) {
+            System.out.println(e); 
+            return "couldn't get custgender";
+        }
+    }
+    
+    public String getCustName(String email) {  
+          try{ 
+            PreparedStatement pstmt = con.prepareStatement("SELECT name FROM customer WHERE email = ?"); 
+            pstmt.setString(1, email); 
+            ResultSet rs = rs.executeQuery(); rs.next(); 
+            return rs.getString("name");
+        } catch (SQLException e) {
+            System.out.println(e); 
+            return "couldn't get custname";
+        }
+    }
 
     public void createMovieTicket(String email, String movie, String seatpos, String movietime) {  
         try{   
