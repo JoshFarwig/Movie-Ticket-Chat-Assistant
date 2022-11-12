@@ -28,7 +28,7 @@ CREATE TABLE movie (
     PRIMARY KEY(name)
 ); 
 
-CREATE TABLE movieTimes(
+CREATE TABLE movietimes(
     movietime datetime,  
     mname varchar(30), 
     FOREIGN KEY(mname) references movie(name)
