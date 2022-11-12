@@ -11,7 +11,6 @@ DROP TABLE IF EXISTS addon;
 DROP TABLE IF EXISTS inCart;
 SET FOREIGN_KEY_CHECKS = 1; 
 
-
 CREATE TABLE customer (  
     email varchar(30), 
     cfirstname varchar(20),  
@@ -27,17 +26,17 @@ CREATE TABLE movie (
     releasedate date,   
     duration time,   
     cost decimal(8,2),
-    PRIMARY KEY(mname)
+    PRIMARY KEY(name)
 )  ENGINE = InnoDB
 
 CREATE TABLE movieticket(  
     mtid int AUTO_INCREMENT,   
-    cemail int,
+    cemail varchar(30),
     mname varchar(30),    
     totalPrice decimal(8,2),
     PRIMARY KEY(mtid), 
-    FOREIGN KEY(cemail) references customer(cemail), 
-    FOREIGN KEY(mname) references movie(mname),
+    FOREIGN KEY(cemail) references customer(email), 
+    FOREIGN KEY(mname) references movie(name)
 ) ENGINE = InnoDB
 
 CREATE TABLE addon(  
@@ -66,8 +65,8 @@ CREATE TABLE seat(
     mname varchar(30),  
     cemail varchar(30),   
     PRIMARY KEY(sid), 
-    FOREIGN KEY(mname) references movie(mname),  
-    FOREIGN KEY(cemail) references customer(email),
+    FOREIGN KEY(mname) references movie(name),  
+    FOREIGN KEY(cemail) references customer(email)
 ) ENGINE = InnoDB  
 
 
