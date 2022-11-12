@@ -37,9 +37,7 @@ CREATE TABLE movietimes(
 CREATE TABLE movieticket(  
     mtid int AUTO_INCREMENT,   
     cemail varchar(30),
-    mname varchar(30), 
-    seatpos char(2), 
-    movtime varchar(30),
+    mname varchar(30),    
     totalPrice decimal(8,2),
     PRIMARY KEY(mtid), 
     FOREIGN KEY(cemail) references customer(email), 
