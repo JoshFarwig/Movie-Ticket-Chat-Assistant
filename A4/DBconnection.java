@@ -34,13 +34,12 @@ public class DBconnection {
         } 
     }  
 
-    public void createCustomer(String firstname, String lastname, String gender, String email) { 
+    public void createCustomer(String name, String gender, String email) { 
         try{ 
-            PreparedStatement pstmt = con.prepareStatement("INSERT INTO customer(cfirstname, clastname, gender, email) VALUES(?, ?, ?, ?)"); 
-            pstmt.setString(1, firstname);  
-            pstmt.setString(2, lastname);  
-            pstmt.setString(3, gender);  
-            pstmt.setString(4, email);  
+            PreparedStatement pstmt = con.prepareStatement("INSERT INTO customer(cname, gender, email) VALUES(?, ?, ?)"); 
+            pstmt.setString(1, name);  
+            pstmt.setString(2, gender);  
+            pstmt.setString(3, email);  
             pstmt.execute(); 
         } catch (SQLException e) {
             System.out.println(e);

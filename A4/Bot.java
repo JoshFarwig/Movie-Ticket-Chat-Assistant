@@ -16,7 +16,9 @@ public class Bot extends JFrame {
     private JButton b = new JButton("Book a ticket");
     private JButton b2 = new JButton("Amend your booking");
     private JButton b3 = new JButton("Cancel your booking");
+    private JButton c = new JButton("Cancel");
     String g = "";
+    int count = 0;
 
     	// Intializing Movies
 	static ArrayList<Movie> allMovies = new ArrayList<Movie>() {
@@ -37,7 +39,7 @@ public class Bot extends JFrame {
 
 public Bot(){
     //setting up JFrame
-    bot("Hi, how can I help you?");
+    res("Hi, how can I help you?");
     JFrame frame = new JFrame();
     frame.setDefaultCloseOperation(EXIT_ON_CLOSE);
     frame.setVisible(true);
@@ -71,47 +73,102 @@ public Bot(){
 
     //Actions
 chatbox.addActionListener(new ActionListener() {
-
+            String custName = null;
+			char custGender = 0;
+			String movieName = null;
+			String movieTime = null;
+            String email = "";
         @Override
         public void actionPerformed(ActionEvent e) {
             g = chatbox.getText();
             Chatarea.append("You: " + g + "\n");
             chatbox.setText("");
             
+            if (count == 1) {
+                email = g;
+                for (int i = 0; i < customers.size(); i++) {
+                    if (customers.get(i).getEmail().compareTo(g) == 0) {
+                        res("Welcome back!");
+                        custName = customers.get(i).getName();
+						custGender = customers.get(i).getGender();
+                    } else {
+                        res("Welcome");
+                        res("Please enter your name: ");
+                        count++;
+						break;
+                    }
+                }
+            }
+            else if (count == 2) {
+                custName = g;
+                res("Please enter your gender: (M/F)");
+                count++;
+            }
+            else if (count == 3) {
+                custGender = g.charAt(0); 
+                customers.add((new Customer(custName, 0, custGender, null, email)));
+                res("Account created!");
+                res("Select a movie: ");
+                for (int i = 0; i < allMovies.size(); i++) {
+                    res2(i + 1 + ". " + allMovies.get(i).getMovieName() + " ");
+                count++;
+                }
+            }
+            else if (count == 4) {
+                int mov = Integer.parseInt(g);
+                res("test");
+                boolean isValid = true;
+                Movie custMovie = null;
+                while (isValid) {
+                    // if valid
+                    if (mov <= allMovies.size() && mov > 0) {
+
+                        custMovie = allMovies.get(mov-1);
+                        movieName = custMovie.getMovieName();
+                        movieTime = custMovie.getReleaseDate() + " " + custMovie.getShowTime();
+                        res("Available Timings: " + movieTime);
+                        isValid = false;
+                        count++;
+                    } else {
+                        res("Invalid Input. Please try again: ");
+                        count = 4;
+                    }
+                }	
+					}
+            }
         }
-    });
+    );
 //booking a ticket
 b.addActionListener(new ActionListener() {
-			String custName = null;
-			char custGender = 0;
-			String movieName = null;
-			String movieTime = null;
+			
         @Override
         public void actionPerformed(ActionEvent e) {
-            bot("Okay, I can help you with that. \n Enter your email: ");
-            String email = g;
-            for (int i = 0; i < customers.size(); i++) {
-                if (customers.get(i).getEmail().compareTo(email) == 0) {
-                    bot("Welcome back!");
-                    custName = customers.get(i).getName();
-                    custGender = customers.get(i).getGender();
-                } else {
-                    bot("Welcome");
-                    bot("Please enter your name: ");
-                    custName = g; 
-                    bot("Please enter your gender: (M/F)");
-                    custGender = g.charAt(0); 
-                    customers.add((new Customer(custName, 0, custGender, null, email)));
-                    break;
-                }
+            if (b.getText().equals("Cancel")){
+                b.setText("Book a Ticket");
+                count = 0;
+                res("Returning to main menu.");
+                return;
+            }
+            count++;
+            frame.remove(b2);
+            frame.remove(b3);
+            b.setText("Cancel");
 
-        }
-}});
+            res("Okay, I can help you with that. \nEnter your email: ");
+            String email = g;
+           }
+        
+        });
 }
-private void bot(String string){
+
+
+
+private void res(String string){
     Chatarea.append("Sally: " + string + "\n");
 }
-
+private void res2(String string){
+    Chatarea.append(string + "\n");
+}
 
 
 public static void main(String[] args) {
