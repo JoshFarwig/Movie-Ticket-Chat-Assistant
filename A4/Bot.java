@@ -17,6 +17,7 @@ public class Bot extends JFrame {
     private JButton b2 = new JButton("Amend your booking");
     private JButton b3 = new JButton("Cancel your booking");
     private JButton c = new JButton("Cancel");
+    DBconnection db = new DBconnection(); 
     String g = "";
     int count = 0;
 
@@ -86,6 +87,20 @@ chatbox.addActionListener(new ActionListener() {
             
             if (count == 1) {
                 email = g;
+                /*
+                if (db.checkExistingCust(email)){
+                    res("Welcome back!");
+                        custName = customers.get(i).getName();
+						custGender = customers.get(i).getGender();
+                }
+                else {
+                   res("Welcome");
+                        res("Please enter your name: ");
+                        count++;
+						break;  
+                }
+                */
+
                 for (int i = 0; i < customers.size(); i++) {
                     if (customers.get(i).getEmail().compareTo(g) == 0) {
                         res("Welcome back!");

@@ -17,16 +17,16 @@ CREATE TABLE customer (
     gender char(1),  
     bdate date,
     PRIMARY KEY(email)
-) ENGINE = InnoDB 
+); 
 
 CREATE TABLE movie ( 
-    name varchar(30), 
-    genre varchar(20),  
-    releasedate date,   
+    mname varchar(30), 
+    genre varchar(20), 
+    releasedate date, 
     duration time,   
     cost decimal(8,2),
-    PRIMARY KEY(name)
-)  ENGINE = InnoDB
+    PRIMARY KEY(mname)
+);
 
 CREATE TABLE movieticket(  
     mtid int AUTO_INCREMENT,   
@@ -35,8 +35,8 @@ CREATE TABLE movieticket(
     totalPrice decimal(8,2),
     PRIMARY KEY(mtid), 
     FOREIGN KEY(cemail) references customer(email), 
-    FOREIGN KEY(mname) references movie(name)
-) ENGINE = InnoDB
+    FOREIGN KEY(mname) references movie(mname)
+);
 
 CREATE TABLE addon(  
     aid int,  
@@ -44,7 +44,7 @@ CREATE TABLE addon(
     price decimal(8,2), 
     category varchar(20), 
     PRIMARY KEY(aid) 
-) ENGINE = InnoDB
+);
 
 CREATE TABLE inCart( 
     aid int, 
@@ -56,7 +56,7 @@ CREATE TABLE inCart(
     FOREIGN KEY(aid) references addon(aid), 
     FOREIGN KEY(cemail) references customer(email), 
     FOREIGN KEY(ticketid) references movieticket(mtid)
-) ENGINE = InnoDB 
+);
 
 CREATE TABLE seat( 
     sid int, 
@@ -64,9 +64,9 @@ CREATE TABLE seat(
     mname varchar(30),  
     cemail varchar(30),   
     PRIMARY KEY(sid), 
-    FOREIGN KEY(mname) references movie(name),  
+    FOREIGN KEY(mname) references movie(mname),  
     FOREIGN KEY(cemail) references customer(email)
-) ENGINE = InnoDB  
+); 
 
 
 INSERT INTO movie VALUES('Black Adam', 'Action', '2022-10-3', '01:30:00', 22.25); 
