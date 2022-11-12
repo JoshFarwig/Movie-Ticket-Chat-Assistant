@@ -3,9 +3,10 @@ import java.util.ArrayList;
 
 public class DBconnection {  
     
-    private Connection con;  
-
-    public Connection connect() {  
+  
+    Connection con = null;  
+    public DBconnection(){  
+       
         String url = "jdbc:mysql://localhost/mtbs";
         String uid = "root";
         String pw = "310rootpw"; 
@@ -14,7 +15,6 @@ public class DBconnection {
         } catch (SQLException e) {
             System.out.println(e);
         }
-        return con;
     
     }    
 

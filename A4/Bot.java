@@ -135,7 +135,7 @@ chatbox.addActionListener(new ActionListener() {
             else if (count == 7) {
                 confirm = g;
                 if (confirm.equals("y")){
-                    db.createMovieTicket(email, movieName);
+                    db.createMovieTicket(email, movieName, seat, "");
                     Email send = new Email(email,"Movie Booking Confirmation", "Thank you for your order! Your ticket ID is : " + db.getMovieTicketID(email, movieName) + "\nOrder Summary\nCustomer Information\n\tName: " + custName + "\n\tEmail: " + email + "\n\tGender: " + custGender + "\nBooking Confirmation\n\tMovie Name: " + movieName + "\nMovie Time: " + "\nYour Selected Seat: " + seat);
                     res("The receipt has been sent to your email.");
                 }
