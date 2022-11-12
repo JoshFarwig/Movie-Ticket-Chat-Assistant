@@ -5,7 +5,7 @@ public class DBconnection {
     
     private Connection con;  
 
-    public DBconnection() {  
+    public Connection connect() {  
         String url = "jdbc:mysql://localhost/mtbs";
         String uid = "root";
         String pw = "310rootpw"; 
@@ -14,6 +14,7 @@ public class DBconnection {
         } catch (SQLException e) {
             System.out.println(e);
         }
+        return con;
     
     }    
 
@@ -34,7 +35,7 @@ public class DBconnection {
 
     public void createCustomer(String name, String gender, String email, String bdate) { 
         try{ 
-            PreparedStatement pstmt = con.prepareStatement("INSERT INTO customer(cname, gender, email) VALUES(?, ?, ?, ?)"); 
+            PreparedStatement pstmt = con.prepareStatement("INSERT INTO customer(cname, gender, email, bdate) VALUES(?, ?, ?, ?)"); 
             pstmt.setString(1, name);  
             pstmt.setString(2, gender);  
             pstmt.setString(3, email);    
@@ -45,16 +46,18 @@ public class DBconnection {
         }
     } 
 
-    public void createMovieTicket(String email, String movie) {  
+    public void createMovieTicket(String email, String movie, String seatpos, String movietime) {  
         try{   
             PreparedStatement getMoviecost = con.prepareStatement("SELECT cost FROM movie WHERE name = ?"); 
             getMoviecost.setString(1, movie); 
             ResultSet rs = getMoviecost.executeQuery();  rs.next();  
             double cost = rs.getDouble("cost"); 
-            PreparedStatement pstmt = con.prepareStatement("INSERT INTO movieticket(cemail, mname, totalCost) VALUES(?, ?, ?)"); 
+            PreparedStatement pstmt = con.prepareStatement("INSERT INTO movieticket(cemail, mname, seatpos, movtime, totalCost) VALUES(?, ?, ?, ?, ?)"); 
             pstmt.setString(1, email);  
             pstmt.setString(2, movie);   
-            pstmt.setDouble(3, cost);  
+            pstmt.setString(3, seatpos);  
+            pstmt.setString(4, movietime); 
+            pstmt.setDouble(5, cost);  
             pstmt.execute(); 
         } catch (SQLException e) {
             System.out.println(e);
@@ -104,7 +107,7 @@ public class DBconnection {
             Statement stmt = con.createStatement();   
             ResultSet rs = stmt.executeQuery("SELECT * FROM movie");  
             while(rs.next()) { 
-                output.add(String.format("%s, %s, %s, %s",rs.getString("mname"),rs.getString("genre"),rs.getString("releasedate"), rs.getString("duration"))); 
+                output.add(String.format("%s, Genre: %s, ReleaseDate: %s, Movie Duration: %s",rs.getString("name"),rs.getString("genre"),rs.getString("releasedate"), rs.getString("duration"))); 
             } 
             return output; 
         } catch (SQLException e){ 
@@ -113,7 +116,24 @@ public class DBconnection {
             return output; 
         }
 
-    } 
+    }  
+    
+    public ArrayList<String> getMovieTimes(String movie) {  
+        ArrayList<String> output = new ArrayList<>(); 
+        try {   
+            PreparedStatement pstmt = con.prepareStatement("SELECT movietime FROM movietimes WHERE mname = ?");  
+            pstmt.setString(1, movie);
+            ResultSet rs = pstmt.executeQuery();  
+            while(rs.next()) { 
+                output.add(rs.getString("movietime"));
+            } 
+            return output; 
+        } catch (SQLException e){ 
+            System.out.println(e);    
+            output.add("Unable to generate movie data..."); 
+            return output; 
+        }
+    }
 
     public ArrayList<String> showAvailableSeats(String movie) { 
         ArrayList<String> output = new ArrayList<>();  
@@ -153,7 +173,21 @@ public class DBconnection {
         } catch (SQLException e) { 
             System.out.println(e);
         }
-    }  
+    }   
+    
+    public String getSeatPos(String email, String movie) {  
+        try { 
+            PreparedStatement pstmt = con.prepareStatement("SELECT srowcol FROM seat WHERE cemail = ? and mname = ?"); 
+            pstmt.setString(1, email); 
+            pstmt.setString(2, movie); 
+            ResultSet rs = pstmt.executeQuery(); rs.next();
+            return rs.getString("srowcol");
+        } catch (SQLException e) { 
+            System.out.println(e);
+            return "no seat found";
+        }
+    
+    }
 
    /*public ArrayList<String> showAllAddons(){ 
         ArrayList<String> output = new ArrayList<>();  
