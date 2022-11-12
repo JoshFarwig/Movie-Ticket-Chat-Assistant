@@ -16,25 +16,9 @@ public class Bot extends JFrame {
     private JButton b3 = new JButton("Cancel your booking");
     private JButton c = new JButton("Cancel");
     DBconnection db = new DBconnection(); 
+    
     String g = "";
     int count = 0;
-
-    	// Intializing Movies
-	static ArrayList<Movie> allMovies = new ArrayList<Movie>() {
-		{
-			add(new Movie("Black Adam", "9:30pm", "September 14, 2022"));
-			add(new Movie("Smile", "7:15pm", "May 29, 2022"));
-			add(new Movie("Thor", "8:45pm", "October 14, 2022"));
-		}
-	};
-	// Intializing Temporary Customer Storage Array
-	static ArrayList<Customer> customers = new ArrayList<Customer>() {
-		{
-			add(new Customer("Zeyad", 1234, 'M', null, "zee@gmail.com"));
-		}
-	};
-	// intializing MovieTicket Storage Array
-	static ArrayList<MovieTicket> ticket_array = new ArrayList<MovieTicket>();
 
 public Bot(){
     //setting up JFrame
@@ -43,11 +27,10 @@ public Bot(){
     frame.setDefaultCloseOperation(EXIT_ON_CLOSE);
     frame.setVisible(true);
     frame.setResizable(false);
-    frame.setLayout(null);
-    frame.setSize(600, 600);
+    frame.setSize(600, 800);
     frame.setTitle("Virtual Assistant");
    
-
+   
     //adding all textfield and buttons
     frame.add(Chatarea);
     frame.add(chatbox);
@@ -55,29 +38,35 @@ public Bot(){
     frame.add(b2);
     frame.add(b3);
 
-    Chatarea.setSize(600,400);
+    //Scroll Pane
+    JScrollPane sp = new JScrollPane(Chatarea, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED,JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
+    frame.add(sp);
+
+    Chatarea.setSize(500,600);
     Chatarea.setLocation(2,2);
 
     chatbox.setSize(580,50);
-    chatbox.setLocation(2,500);
+    chatbox.setLocation(2,674);
 
     b.setSize(198,70);
-    b.setLocation(2, 402);
+    b.setLocation(2, 602);
 
     b2.setSize(198,70);
-    b2.setLocation(202, 402);
+    b2.setLocation(202, 602);
 
     b3.setSize(198,70);
-    b3.setLocation(402, 402);
+    b3.setLocation(402, 602);
 
     //Actions
 chatbox.addActionListener(new ActionListener() {
             String custName = null;
 			char custGender = 0;
 			String movieName = null;
-			String movieTime = null;
             String custBdate = null;
+            String seat = null;
             String email = "";
+            String confirm = "";
+            int mov = 0;
         @Override
         public void actionPerformed(ActionEvent e) {
             g = chatbox.getText();
@@ -90,6 +79,8 @@ chatbox.addActionListener(new ActionListener() {
                 if (db.checkExistingCust(email)){
                     res("Welcome back!");
                     res2("Select a movie: ");
+                    //custGender = db.getCusGender
+                    //custGender = db.getCusName
                     for (int i = 0; i < db.getAllMovies().size(); i++) {
                         res2(i + 1 + ". " + db.getAllMovies().get(i) + " ");
                        
@@ -103,19 +94,6 @@ chatbox.addActionListener(new ActionListener() {
 						
                 }
                
-
-               /* for (int i = 0; i < customers.size(); i++) {
-                    if (customers.get(i).getEmail().compareTo(g) == 0) {
-                        res("Welcome back!");
-                        custName = customers.get(i).getName();
-						custGender = customers.get(i).getGender();
-                    } else {
-                        res("Welcome");
-                        res("Please enter your name: ");
-                        count++;
-						break;
-                    }
-                } */ 
             }
             else if (count == 2) {
                 custName = g;
@@ -134,30 +112,37 @@ chatbox.addActionListener(new ActionListener() {
                 res("Select a movie: ");
                 for (int i = 0; i < db.getAllMovies().size(); i++) {
                         res2(i + 1 + ". " + db.getAllMovies().get(i) + " ");
-                count++;
                 }
+                count++;
             }
             else if (count == 5) {
-                int mov = Integer.parseInt(g);
-                res("test");
-                boolean isValid = true;
-                Movie custMovie = null;
-                while (isValid) {
-                    // if valid
-                    if (mov <= allMovies.size() && mov > 0) {
+                mov = Integer.parseInt(g);
+                movieName = db.getAllMovies().get(mov-1).substring(0,db.getAllMovies().get(mov-1).indexOf(',')).toString();
+                res("Select your seat: ");
+                res2(db.showAvailableSeats(db.getAllMovies().get(mov).substring(0,db.getAllMovies().get(mov).indexOf(','))).toString());
+                count++;
+			}
+            else if (count == 6) {
+                seat = g;
+                res(seat);
+                db.chooseSeat(email, movieName, seat);
+                res("Seat selected successfully!");
+                res("Confirm your booking: (y/n)");
+                res2("\nOrder Summary\nCustomer Information\n\tName: " + custName + "\n\tEmail: " + email + "\n\tGender: " + custGender + "\nBooking Confirmation\n\tMovie Name: " + movieName +  "\nYour Selected Seat: " + seat);
+                count++;
+            }
 
-                        custMovie = allMovies.get(mov-1);
-                        movieName = custMovie.getMovieName();
-                        movieTime = custMovie.getReleaseDate() + " " + custMovie.getShowTime();
-                        res("Available Timings: " + movieTime);
-                        isValid = false;
-                        count++;
-                    } else {
-                        res("Invalid Input. Please try again: ");
-                        count = 4;
-                    }
-                }	
-					}
+            else if (count == 7) {
+                confirm = g;
+                if (confirm.equals("y")){
+                    db.createMovieTicket(email, movieName);
+                    Email send = new Email(email,"Movie Booking Confirmation", "Thank you for your order! Your ticket ID is : " + db.getMovieTicketID(email, movieName) + "\nOrder Summary\nCustomer Information\n\tName: " + custName + "\n\tEmail: " + email + "\n\tGender: " + custGender + "\nBooking Confirmation\n\tMovie Name: " + movieName + "\nMovie Time: " + "\nYour Selected Seat: " + seat);
+                    res("The receipt has been sent to your email.");
+                }
+                else if (confirm.equals("n")){
+
+                }
+            }
             }
         }
     );
@@ -167,14 +152,13 @@ b.addActionListener(new ActionListener() {
         @Override
         public void actionPerformed(ActionEvent e) {
             if (b.getText().equals("Cancel")){
+            
                 b.setText("Book a Ticket");
                 count = 0;
                 res("Returning to main menu.");
                 return;
             }
             count++;
-            frame.remove(b2);
-            frame.remove(b3);
             b.setText("Cancel");
 
             res("Okay, I can help you with that. \nEnter your email: ");
@@ -182,8 +166,17 @@ b.addActionListener(new ActionListener() {
            }
         
         });
-}
 
+//amending a ticket
+b2.addActionListener(new ActionListener(){
+        public void actionPerformed(ActionEvent e){
+
+        }
+});
+
+
+
+}
 
 
 private void res(String string){
@@ -192,6 +185,7 @@ private void res(String string){
 private void res2(String string){
     Chatarea.append(string + "\n");
 }
+
 
 
 public static void main(String[] args) {
