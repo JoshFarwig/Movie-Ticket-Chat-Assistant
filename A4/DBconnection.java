@@ -114,7 +114,24 @@ public class DBconnection {
             return output; 
         }
 
-    } 
+    }  
+    
+    public ArrayList<String> getMovieTimes(String movie) {  
+        ArrayList<String> output = new ArrayList<>(); 
+        try {   
+            PreparedStatement pstmt = con.prepareStatement("SELECT movietime FROM movietimes WHERE mname = ?");  
+            pstmt.setString(1, movie);
+            ResultSet rs = pstmt.executeQuery();  
+            while(rs.next()) { 
+                output.add(rs.getString("movietime"));
+            } 
+            return output; 
+        } catch (SQLException e){ 
+            System.out.println(e);    
+            output.add("Unable to generate movie data..."); 
+            return output; 
+        }
+    }
 
     public ArrayList<String> showAvailableSeats(String movie) { 
         ArrayList<String> output = new ArrayList<>();  
