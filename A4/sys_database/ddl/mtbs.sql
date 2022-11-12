@@ -41,9 +41,7 @@ CREATE TABLE movieticket(
     seatpos char(2), 
     movtime varchar(30),
     totalPrice decimal(8,2),
-    PRIMARY KEY(mtid), 
-    FOREIGN KEY(cemail) references customer(email), 
-    FOREIGN KEY(mname) references movie(name)
+    PRIMARY KEY(mtid)
 );
 
 /* CREATE TABLE addon(  

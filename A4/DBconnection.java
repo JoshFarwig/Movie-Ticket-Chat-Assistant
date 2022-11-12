@@ -35,11 +35,11 @@ public class DBconnection {
 
     public void createCustomer(String name, String gender, String email, String bdate) { 
         try{ 
-            PreparedStatement pstmt = con.prepareStatement("INSERT INTO customer(cname, gender, email, bdate) VALUES(?, ?, ?, ?)"); 
+            PreparedStatement pstmt = con.prepareStatement("INSERT INTO customer(name, gender, email, bdate) VALUES(?, ?, ?, ?)"); 
             pstmt.setString(1, name);  
             pstmt.setString(2, gender);  
             pstmt.setString(3, email);    
-            pstmt.setString(3, bdate); 
+            pstmt.setString(4, bdate); 
             pstmt.execute(); 
         } catch (SQLException e) {
             System.out.println(e);
@@ -52,7 +52,7 @@ public class DBconnection {
             getMoviecost.setString(1, movie); 
             ResultSet rs = getMoviecost.executeQuery();  rs.next();  
             double cost = rs.getDouble("cost"); 
-            PreparedStatement pstmt = con.prepareStatement("INSERT INTO movieticket(cemail, mname, seatpos, movtime, totalCost) VALUES(?, ?, ?, ?, ?)"); 
+            PreparedStatement pstmt = con.prepareStatement("INSERT INTO movieticket(cemail, mname, seatpos, movtime, totalPrice) VALUES(?, ?, ?, ?, ?)"); 
             pstmt.setString(1, email);  
             pstmt.setString(2, movie);   
             pstmt.setString(3, seatpos);  
