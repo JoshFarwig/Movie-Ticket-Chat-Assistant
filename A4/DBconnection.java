@@ -104,7 +104,7 @@ public class DBconnection {
             Statement stmt = con.createStatement();   
             ResultSet rs = stmt.executeQuery("SELECT * FROM movie");  
             while(rs.next()) { 
-                output.add(String.format("%s, %s, %s, %s",rs.getString("mname"),rs.getString("genre"),rs.getString("releasedate"), rs.getString("duration"))); 
+                output.add(String.format("%s, %s, %s, %s",rs.getString("name"),rs.getString("genre"),rs.getString("releasedate"), rs.getString("duration"))); 
             } 
             return output; 
         } catch (SQLException e){ 
