@@ -1,0 +1,11 @@
+{
+    "java.project.referencedLibraries": [
+        "lib/**/*.jar",
+        "libs/activation.jar",
+        "libs/javax.mail.jar",
+        "libs/junit-jupiter-api-5.8.2.jar",
+        "libs/junit-platform-console-standalone-1.8.2.jar",
+        "libs/mssql-jdbc-11.2.0.jre11.jar",
+        "libs/mysql-connector-java-8.0.27.jar"
+    ]
+}

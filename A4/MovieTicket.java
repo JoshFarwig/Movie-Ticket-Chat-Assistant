@@ -1,4 +1,4 @@
-package A4;
+
 public class MovieTicket {
 	// attributes
 	private int ticketID; // contains ID for associated Ticket
