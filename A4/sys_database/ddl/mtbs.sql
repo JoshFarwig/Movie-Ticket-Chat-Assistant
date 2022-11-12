@@ -31,7 +31,7 @@ CREATE TABLE movie (
 CREATE TABLE movieTimes(
     movietime datetime,  
     mname varchar(30), 
-    FOREIGN KEY(mname) references movie()
+    FOREIGN KEY(mname) references movie(name)
 ); 
 
 CREATE TABLE movieticket(  
@@ -76,7 +76,19 @@ CREATE TABLE seat(
 
 INSERT INTO movie VALUES('Black Adam', 'Action', '2022-10-3', '01:30:00', 22.25); 
 INSERT INTO movie VALUES('Smile', 'Horror', '2022-11-10', '2:30:00', 15.75); 
-INSERT INTO movie VALUES('Thor: Love and Thunder','Action/Comedy', '2022-6-22', '02:15:00', 20.50);  
+INSERT INTO movie VALUES('Thor: Love and Thunder','Action/Comedy', '2022-6-22', '02:15:00', 20.50);   
+
+INSERT INTO movietimes VALUES('2022-11-15 08:30:00', 'Black Adam');  
+INSERT INTO movietimes VALUES('2022-11-15 10:00:00', 'Black Adam');   
+INSERT INTO movietimes VALUES('2022-11-15 13:30:00', 'Black Adam');    
+
+INSERT INTO movietimes VALUES('2022-11-17 14:30:00', 'Smile');  
+INSERT INTO movietimes VALUES('2022-11-17 17:00:00', 'Smile');   
+INSERT INTO movietimes VALUES('2022-11-17 19:30:00', 'Smile');    
+
+INSERT INTO movietimes VALUES('2022-11-19 09:30:00', 'Thor: Love and Thunder');   
+INSERT INTO movietimes VALUES('2022-11-19 12:00:00', 'Thor: Love and Thunder');   
+INSERT INTO movietimes VALUES('2022-11-19 14:15:00', 'Thor: Love and Thunder');  
 
 INSERT INTO customer(cname, gender, email, bdate) VALUES('Zee Ganainy', 'M', 'zee@gmail.com', '2002-10-30');
 INSERT INTO customer(cname, gender, email, bdate) VALUES('Josh Farwig', 'M','josh96753@gmail.com', '2002-01-31');
@@ -118,4 +130,4 @@ INSERT INTO seat VALUES(32, 'B4', 'Thor: Love and Thunder', null);
 INSERT INTO seat VALUES(33, 'C1', 'Thor: Love and Thunder', null); 
 INSERT INTO seat VALUES(34, 'C2', 'Thor: Love and Thunder', null); 
 INSERT INTO seat VALUES(35, 'C3', 'Thor: Love and Thunder', null); 
-INSERT INTO seat VALUES(36, 'C4', 'Thor: Love and Thunder', null);
+INSERT INTO seat VALUES(36, 'C4', 'Thor: Love and Thunder', null); 
