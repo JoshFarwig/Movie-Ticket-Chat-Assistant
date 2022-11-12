@@ -90,8 +90,8 @@ INSERT INTO movietimes VALUES('2022-11-19 09:30:00', 'Thor: Love and Thunder');
 INSERT INTO movietimes VALUES('2022-11-19 12:00:00', 'Thor: Love and Thunder');   
 INSERT INTO movietimes VALUES('2022-11-19 14:15:00', 'Thor: Love and Thunder');  
 
-INSERT INTO customer(cname, gender, email, bdate) VALUES('Zee Ganainy', 'M', 'zee@gmail.com', '2002-10-30');
-INSERT INTO customer(cname, gender, email, bdate) VALUES('Josh Farwig', 'M','josh96753@gmail.com', '2002-01-31');
+INSERT INTO customer(name, gender, email, bdate) VALUES('Zee Ganainy', 'M', 'zee@gmail.com', '2002-10-30');
+INSERT INTO customer(name, gender, email, bdate) VALUES('Josh Farwig', 'M','josh96753@gmail.com', '2002-01-31');
 
 INSERT INTO seat VALUES(1, 'A1', 'Black Adam', null); 
 INSERT INTO seat VALUES(2, 'A2', 'Black Adam', null);  
