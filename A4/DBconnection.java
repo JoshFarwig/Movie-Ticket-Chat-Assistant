@@ -5,7 +5,7 @@ public class DBconnection {
     
     private Connection con;  
 
-    public DBconnection() {  
+    public Connection connect() {  
         String url = "jdbc:mysql://localhost/mtbs";
         String uid = "root";
         String pw = "310rootpw"; 
@@ -14,6 +14,7 @@ public class DBconnection {
         } catch (SQLException e) {
             System.out.println(e);
         }
+        return con;
     
     }    
 
@@ -113,24 +114,7 @@ public class DBconnection {
             return output; 
         }
 
-    }  
-    
-    public ArrayList<String> getMovieTimes(String movie) {  
-        ArrayList<String> output = new ArrayList<>(); 
-        try {   
-            PreparedStatement pstmt = con.PrepareStatement("SELECT movietime FROM movietimes WHERE mname = ?");  
-            pstmt.setString(1, movie);
-            ResultSet rs = pstmt.executeQuery();  
-            while(rs.next()) { 
-                output.add(rs.getString("movietime")); 
-            } 
-            return output; 
-        } catch (SQLException e){ 
-            System.out.println(e);    
-            output.add("Unable to generate movie times..."); 
-            return output; 
-        }
-    }
+    } 
 
     public ArrayList<String> showAvailableSeats(String movie) { 
         ArrayList<String> output = new ArrayList<>();  
