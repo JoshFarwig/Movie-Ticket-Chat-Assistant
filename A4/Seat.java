@@ -1,4 +1,4 @@
-package A4;
+
 
 public class Seat{  
 // attributes
