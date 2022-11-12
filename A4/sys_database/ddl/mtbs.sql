@@ -13,8 +13,7 @@ SET FOREIGN_KEY_CHECKS = 1;
 
 CREATE TABLE customer (  
     email varchar(30), 
-    cfirstname varchar(20),  
-    clastname varchar(20),
+    cname varchar(40),  
     gender char(1),  
     bdate date,
     PRIMARY KEY(email)
@@ -74,8 +73,8 @@ INSERT INTO movie VALUES('Black Adam', 'Action', '2022-10-3', '01:30:00', 22.25)
 INSERT INTO movie VALUES('Smile', 'Horror', '2022-11-10', '2:30:00', 15.75); 
 INSERT INTO movie VALUES('Thor: Love and Thunder','Action/Comedy', '2022-6-22', '02:15:00', 20.50);  
 
-INSERT INTO customer(cfirstname, clastname, gender, email, bdate) VALUES('Zee', 'Gianay','M', 'zee@gmail.com', '2002-10-30');
-INSERT INTO customer(cfirstname, clastname, gender, email, bdate) VALUES('Josh', 'Farwig','M','josh96753@gmail.com', '2002-01-31');
+INSERT INTO customer(cname, gender, email, bdate) VALUES('Zee Ganainy', 'M', 'zee@gmail.com', '2002-10-30');
+INSERT INTO customer(cname, gender, email, bdate) VALUES('Josh Farwig', 'M','josh96753@gmail.com', '2002-01-31');
 
 INSERT INTO seat VALUES(1, 'A1', 'Black Adam', null); 
 INSERT INTO seat VALUES(2, 'A2', 'Black Adam', null);  
