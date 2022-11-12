@@ -15,7 +15,7 @@ CREATE TABLE customer (
     email varchar(30), 
     name varchar(40),  
     gender char(1),  
-    bdate date,
+    bdate char(10),
     PRIMARY KEY(email)
 ); 
 
@@ -29,8 +29,8 @@ CREATE TABLE movie (
 ); 
 
 CREATE TABLE movietimes(
-    movietime datetime,  
-    mname varchar(30), 
+    movietime varchar(30),  
+    mname varchar(40), 
     FOREIGN KEY(mname) references movie(name)
 ); 
 
@@ -78,20 +78,20 @@ INSERT INTO movie VALUES('Black Adam', 'Action', '2022-10-3', '01:30:00', 22.25)
 INSERT INTO movie VALUES('Smile', 'Horror', '2022-11-10', '2:30:00', 15.75); 
 INSERT INTO movie VALUES('Thor: Love and Thunder','Action/Comedy', '2022-6-22', '02:15:00', 20.50);   
 
-INSERT INTO movietimes VALUES('2022-11-15 08:30:00', 'Black Adam');  
-INSERT INTO movietimes VALUES('2022-11-15 10:00:00', 'Black Adam');   
-INSERT INTO movietimes VALUES('2022-11-15 13:30:00', 'Black Adam');    
+INSERT INTO movietimes VALUES('11/15/2022 11:30am', 'Black Adam');  
+INSERT INTO movietimes VALUES('11/15/2022 1:30pm', 'Black Adam');   
+INSERT INTO movietimes VALUES('11/15/2022 3:30pm', 'Black Adam');    
 
-INSERT INTO movietimes VALUES('2022-11-17 14:30:00', 'Smile');  
-INSERT INTO movietimes VALUES('2022-11-17 17:00:00', 'Smile');   
-INSERT INTO movietimes VALUES('2022-11-17 19:30:00', 'Smile');    
+INSERT INTO movietimes VALUES('11/17/2022 2:45pm', 'Smile');  
+INSERT INTO movietimes VALUES('11/17/2022 5:00pm', 'Smile');   
+INSERT INTO movietimes VALUES('11/17/2022 9:35pm', 'Smile');    
 
-INSERT INTO movietimes VALUES('2022-11-19 09:30:00', 'Thor: Love and Thunder');   
-INSERT INTO movietimes VALUES('2022-11-19 12:00:00', 'Thor: Love and Thunder');   
-INSERT INTO movietimes VALUES('2022-11-19 14:15:00', 'Thor: Love and Thunder');  
+INSERT INTO movietimes VALUES('11/19/2022 8:30am', 'Thor: Love and Thunder');   
+INSERT INTO movietimes VALUES('11/19/2022 3:00pm', 'Thor: Love and Thunder');   
+INSERT INTO movietimes VALUES('11/19/2022 9:15pm', 'Thor: Love and Thunder');  
 
-INSERT INTO customer(name, gender, email, bdate) VALUES('Zee Ganainy', 'M', 'zee@gmail.com', '2002-10-30');
-INSERT INTO customer(name, gender, email, bdate) VALUES('Josh Farwig', 'M','josh96753@gmail.com', '2002-01-31');
+INSERT INTO customer(name, gender, email, bdate) VALUES('Zee Ganainy', 'M', 'zee@gmail.com', '10/19/2002');
+INSERT INTO customer(name, gender, email, bdate) VALUES('Josh Farwig', 'M','josh96753@gmail.com', '01/31/2002');
 
 INSERT INTO seat VALUES(1, 'A1', 'Black Adam', null); 
 INSERT INTO seat VALUES(2, 'A2', 'Black Adam', null);  
