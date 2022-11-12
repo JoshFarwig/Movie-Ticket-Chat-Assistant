@@ -10,10 +10,10 @@ public class testjdbc
         try ( Connection con = DriverManager.getConnection(url, uid, pw);
               Statement stmt = con.createStatement();) 
         {
-            ResultSet rst = stmt.executeQuery("SELECT mname FROM movie");
+            ResultSet rst = stmt.executeQuery("SELECT name FROM movie");
             System.out.println("Movie names");
             while (rst.next())
-            {   System.out.println(rst.getString("mname"));
+            {   System.out.println(rst.getString("name"));
             }
         }
         catch (SQLException ex)
