@@ -86,21 +86,25 @@ chatbox.addActionListener(new ActionListener() {
             
             if (count == 1) {
                 email = g;
-                /*
+            
                 if (db.checkExistingCust(email)){
                     res("Welcome back!");
-                        custName = customers.get(i).getName();
-						custGender = customers.get(i).getGender();
+                    res2("Select a movie: ");
+                    for (int i = 0; i < db.getAllMovies().size(); i++) {
+                        res2(i + 1 + ". " + db.getAllMovies().get(i) + " ");
+                       
+                }
+                count = 5;
                 }
                 else {
                    res("Welcome");
                         res("Please enter your name: ");
                         count++;
-						break;  
+						
                 }
-                */
+               
 
-                for (int i = 0; i < customers.size(); i++) {
+               /* for (int i = 0; i < customers.size(); i++) {
                     if (customers.get(i).getEmail().compareTo(g) == 0) {
                         res("Welcome back!");
                         custName = customers.get(i).getName();
@@ -111,7 +115,7 @@ chatbox.addActionListener(new ActionListener() {
                         count++;
 						break;
                     }
-                }
+                } */ 
             }
             else if (count == 2) {
                 custName = g;
@@ -128,8 +132,8 @@ chatbox.addActionListener(new ActionListener() {
                 db.createCustomer(custName, custGender+ "", email, custBdate);
                 res("Account created!");
                 res("Select a movie: ");
-                for (int i = 0; i < allMovies.size(); i++) {
-                    res2(i + 1 + ". " + allMovies.get(i).getMovieName() + " ");
+                for (int i = 0; i < db.getAllMovies().size(); i++) {
+                        res2(i + 1 + ". " + db.getAllMovies().get(i) + " ");
                 count++;
                 }
             }
