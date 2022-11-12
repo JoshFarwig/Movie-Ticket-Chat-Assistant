@@ -113,7 +113,7 @@ public class Pathways {
 						System.out.println("Redirecting to payment...");
 						checked=false; 
 						int ticketId = (int) ((Math.random() * 10000) + 100);
-						Email send = new Email("osho.gm@gmail.com", "test", "Thank you for your order! Your ticket ID is : " + ticketId + "\nOrder Summary\nCustomer Information\n\tName: " + custName + "\n\tEmail: " + email + "\n\tGender: " + custGender + "\nBooking Confirmation\n\tMovie Name: " + movieName + "\nMovie Time: " + movieTime + "\nYour Selected Seat: " + custSeat);
+						Email send = new Email("osho.gm@gmail.com","Movie Booking Confirmation", "Thank you for your order! Your ticket ID is : " + ticketId + "\nOrder Summary\nCustomer Information\n\tName: " + custName + "\n\tEmail: " + email + "\n\tGender: " + custGender + "\nBooking Confirmation\n\tMovie Name: " + movieName + "\nMovie Time: " + movieTime + "\nYour Selected Seat: " + custSeat);
 					}		
 					else{
 						custMovie.cancelSeat(custSeat);
