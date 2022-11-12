@@ -19,8 +19,8 @@ public class MovieTicket {
 		return ticketID;
 	}
 
-	public void setTicketID() {
-		this.ticketID = ticketID;
+	public void setTicketID(int ticketID) {
+		ticketID = this.ticketID;
 	}
 
 	public String getRelatedMovie() {
