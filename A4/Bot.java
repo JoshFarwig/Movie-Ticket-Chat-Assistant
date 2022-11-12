@@ -78,6 +78,7 @@ chatbox.addActionListener(new ActionListener() {
 			char custGender = 0;
 			String movieName = null;
 			String movieTime = null;
+            String custBdate = null;
             String email = "";
         @Override
         public void actionPerformed(ActionEvent e) {
@@ -112,7 +113,12 @@ chatbox.addActionListener(new ActionListener() {
             }
             else if (count == 3) {
                 custGender = g.charAt(0); 
-                db.createCustomer(custName, custGender+ "", email);
+                res("Please enter your birth date: (yyyy-mm-dd)");
+                count++;
+            }
+            else if (count == 4) {
+                custBdate = g;
+                db.createCustomer(custName, custGender+ "", email, custBdate);
                 res("Account created!");
                 res("Select a movie: ");
                 for (int i = 0; i < db.getAllMovies().size(); i++) {
@@ -120,7 +126,7 @@ chatbox.addActionListener(new ActionListener() {
                 }
                 count++;
             }
-            else if (count == 4) {
+            else if (count == 5) {
                 int mov = Integer.parseInt(g);
                	res(db.showAvailableSeats(db.getAllMovies().get(mov).substring(0,db.getAllMovies().get(mov).indexOf(','))).toString());
 					}
