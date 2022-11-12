@@ -146,7 +146,7 @@ public class Pathways {
 							System.out.println("Welcome back!");
 							custName = customers.get(i).getName();
 							custGender = customers.get(i).getGender();
-							existingCustomerIdx = i;
+							
 							check =false;
 							break;
 						}
