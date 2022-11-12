@@ -13,20 +13,26 @@ SET FOREIGN_KEY_CHECKS = 1;
 
 CREATE TABLE customer (  
     email varchar(30), 
-    cname varchar(40),  
+    name varchar(40),  
     gender char(1),  
     bdate date,
     PRIMARY KEY(email)
 ); 
 
 CREATE TABLE movie ( 
-    mname varchar(30), 
+    name varchar(30), 
     genre varchar(20), 
     releasedate date, 
     duration time,   
     cost decimal(8,2),
-    PRIMARY KEY(mname)
-);
+    PRIMARY KEY(name)
+); 
+
+CREATE TABLE movieTimes(
+    movietime datetime,  
+    mname varchar(30), 
+    FOREIGN KEY(mname) references movie()
+); 
 
 CREATE TABLE movieticket(  
     mtid int AUTO_INCREMENT,   
@@ -35,10 +41,10 @@ CREATE TABLE movieticket(
     totalPrice decimal(8,2),
     PRIMARY KEY(mtid), 
     FOREIGN KEY(cemail) references customer(email), 
-    FOREIGN KEY(mname) references movie(mname)
+    FOREIGN KEY(mname) references movie(name)
 );
 
-CREATE TABLE addon(  
+/* CREATE TABLE addon(  
     aid int,  
     aname varchar(20), 
     price decimal(8,2), 
@@ -56,7 +62,7 @@ CREATE TABLE inCart(
     FOREIGN KEY(aid) references addon(aid), 
     FOREIGN KEY(cemail) references customer(email), 
     FOREIGN KEY(ticketid) references movieticket(mtid)
-);
+); */
 
 CREATE TABLE seat( 
     sid int, 
@@ -64,10 +70,9 @@ CREATE TABLE seat(
     mname varchar(30),  
     cemail varchar(30),   
     PRIMARY KEY(sid), 
-    FOREIGN KEY(mname) references movie(mname),  
+    FOREIGN KEY(mname) references movie(name),  
     FOREIGN KEY(cemail) references customer(email)
 ); 
-
 
 INSERT INTO movie VALUES('Black Adam', 'Action', '2022-10-3', '01:30:00', 22.25); 
 INSERT INTO movie VALUES('Smile', 'Horror', '2022-11-10', '2:30:00', 15.75); 
