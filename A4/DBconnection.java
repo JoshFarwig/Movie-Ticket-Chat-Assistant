@@ -46,16 +46,18 @@ public class DBconnection {
         }
     } 
 
-    public void createMovieTicket(String email, String movie) {  
+    public void createMovieTicket(String email, String movie, String seatpos, String movietime) {  
         try{   
             PreparedStatement getMoviecost = con.prepareStatement("SELECT cost FROM movie WHERE name = ?"); 
             getMoviecost.setString(1, movie); 
             ResultSet rs = getMoviecost.executeQuery();  rs.next();  
             double cost = rs.getDouble("cost"); 
-            PreparedStatement pstmt = con.prepareStatement("INSERT INTO movieticket(cemail, mname, totalCost) VALUES(?, ?, ?)"); 
+            PreparedStatement pstmt = con.prepareStatement("INSERT INTO movieticket(cemail, mname, seatpos, movtime, totalCost) VALUES(?, ?, ?, ?, ?)"); 
             pstmt.setString(1, email);  
             pstmt.setString(2, movie);   
-            pstmt.setDouble(3, cost);  
+            pstmt.setString(3, seatpos);  
+            pstmt.setString(4, movietime); 
+            pstmt.setDouble(5, cost);  
             pstmt.execute(); 
         } catch (SQLException e) {
             System.out.println(e);
@@ -171,7 +173,21 @@ public class DBconnection {
         } catch (SQLException e) { 
             System.out.println(e);
         }
-    }  
+    }   
+    
+    public String getSeatPos(String email, String movie) {  
+        try { 
+            PreparedStatement pstmt = con.prepareStatement("SELECT srowcol FROM seat WHERE cemail = ? and mname = ?"); 
+            pstmt.setString(1, email); 
+            pstmt.setString(2, movie); 
+            ResultSet rs = pstmt.executeQuery(); rs.next();
+            return rs.getString("srowcol");
+        } catch (SQLException e) { 
+            System.out.println(e);
+            return "no seat found";
+        }
+    
+    }
 
    /*public ArrayList<String> showAllAddons(){ 
         ArrayList<String> output = new ArrayList<>();  
