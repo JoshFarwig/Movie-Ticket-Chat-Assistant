@@ -1,4 +1,4 @@
-package A4;  
+
  
 import java.util.ArrayList;
 import java.util.GregorianCalendar;
@@ -105,13 +105,15 @@ public class Pathways {
 					System.out.println("Your selected seat is: " + custSeat);
 					seatValid = false;
 
-					getSummary(custName, email, custGender, movieName, movieTime, custSeat.toUpperCase());
+					//getSummary(custName, email, custGender, movieName, movieTime, custSeat.toUpperCase());
 
 					System.out.println("Would you to continue or cancel");
 					String confirm = sc.next().toLowerCase();
 					if(confirm.equals("continue")){
 						System.out.println("Redirecting to payment...");
 						checked=false; 
+						int ticketId = (int) ((Math.random() * 10000) + 100);
+						Email send = new Email("osho.gm@gmail.com", "test", "Thank you for your order! Your ticket ID is : " + ticketId + "\nOrder Summary\nCustomer Information\n\tName: " + custName + "\n\tEmail: " + email + "\n\tGender: " + custGender + "\nBooking Confirmation\n\tMovie Name: " + movieName + "\nMovie Time: " + movieTime + "\nYour Selected Seat: " + custSeat);
 					}		
 					else{
 						custMovie.cancelSeat(custSeat);
@@ -135,7 +137,7 @@ public class Pathways {
 					} }
 							}
 	
-	}
+					}
 			case 3: { 
 				System.out.println("Input your email: ");
 				email = sc.next();
@@ -146,7 +148,6 @@ public class Pathways {
 							System.out.println("Welcome back!");
 							custName = customers.get(i).getName();
 							custGender = customers.get(i).getGender();
-							existingCustomerIdx = i;
 							check =false;
 							break;
 						}
@@ -155,11 +156,13 @@ public class Pathways {
 					}
 					
 				}
+
 			}
 			}
-		}	
+		}
+		
+		
 	}
-	
 	
 
 	public static void getSummary(String name, String email, char gender, String movieName, String movieTime,
@@ -167,7 +170,7 @@ public class Pathways {
 		int ticketId = (int) ((Math.random() * 10000) + 100);
 		System.out.println();
 		System.out.println();
-		System.out.println("Thank you for your order! Your ticket ID is : " + ticketId);
+		System.out.println("Thank you for your order! Your ticket ID is : " + ticketId + "\nOrder Summary\nCustomer Information\n\tName: " + name + "\n\tEmail: " + email + "\n\tGender: " + gender + "\nBooking Confirmation\n\tMovie Name: " + movieName + "\nMovie Time: " + movieTime + "\nYour Selected Seat: " + customerSeat);
 		System.out.println();
 		System.out.println("Order Summary:");
 		System.out.println();
@@ -181,6 +184,7 @@ public class Pathways {
 		System.out.println("\tMovie Time: " + movieTime);
 		System.out.println("\tYour Selected Seat: " + customerSeat);
 		
+
 
 	}
 

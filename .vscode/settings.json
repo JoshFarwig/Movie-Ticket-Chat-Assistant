@@ -4,6 +4,8 @@
         "A4/libs/junit-jupiter-api-5.8.2.jar",
         "A4/libs/junit-platform-console-standalone-1.8.2.jar",
         "A4/libs/mssql-jdbc-11.2.0.jre11.jar",
-        "A4/libs/mysql-connector-java-8.0.27.jar"
+        "A4/libs/mysql-connector-java-8.0.27.jar",
+        "/Users/cjain/Downloads/glassfish5/glassfish/modules/javax.mail.jar",
+        "/Users/cjain/Downloads/jaf-1.1.1/activation.jar"
     ]
 }

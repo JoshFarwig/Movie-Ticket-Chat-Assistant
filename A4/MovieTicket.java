@@ -2,15 +2,15 @@
 public class MovieTicket {
 	// attributes
 	private int ticketID; // contains ID for associated Ticket
-	private Movie relatedMovie; // contains reference to Movie Object
-	private Customer relatedCustomer; // contains reference to Customer
-	private Seat relatedSeat; // contains reference to Seat
+	private String relatedMovie; // contains reference to Movie Object
+	private String relatedCustomerEmail; // contains reference to Customer
+	private String relatedSeat; // contains reference to Seat
 
 	// constructor
-	public MovieTicket(int ticketID, Movie relatedMovie, Customer relatedCustomer, Seat relatedSeat) {
+	public MovieTicket(int ticketID, String relatedMovie, String relatedCustomerEmail, String relatedSeat) {
 		this.ticketID = ticketID;
 		this.relatedMovie = relatedMovie;
-		this.relatedCustomer = relatedCustomer;
+		this.relatedCustomerEmail = relatedCustomerEmail;
 		this.relatedSeat = relatedSeat;
 	}
 
@@ -23,27 +23,27 @@ public class MovieTicket {
 		this.ticketID = ticketID;
 	}
 
-	public Movie getRelatedMovie() {
+	public String getRelatedMovie() {
 		return relatedMovie;
 	}
 
-	public void setRelatedMovie(Movie relatedMovie) {
+	public void setRelatedMovie(String relatedMovie) {
 		this.relatedMovie = relatedMovie;
 	}
 
-	public Customer getRelatedCustomer() {
-		return relatedCustomer;
+	public String getRelatedCustomer() {
+		return relatedCustomerEmail;
 	}
 
-	public void setRelatedMovie(Customer relatedCustomer) {
-		this.relatedCustomer = relatedCustomer;
+	public void setRelatedCustomer(String relatedCustomerEmail) {
+		this.relatedCustomerEmail = relatedCustomerEmail;
 	}
 
-	public Seat getRelatedSeat() {
+	public String getRelatedSeat() {
 		return relatedSeat;
 	}
 
-	public void setRelatedSeat(Seat relatedSeat) {
+	public void setRelatedSeat(String relatedSeat) {
 		this.relatedSeat = relatedSeat;
 	}
 
