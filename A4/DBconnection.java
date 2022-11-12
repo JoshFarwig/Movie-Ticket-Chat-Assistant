@@ -115,7 +115,7 @@ public class DBconnection {
 
     } 
 
-    public ArrayList<String> showAvailabileSeats(String movie) { 
+    public ArrayList<String> showAvailableSeats(String movie) { 
         ArrayList<String> output = new ArrayList<>();  
         try {   
             PreparedStatement pstmt = con.prepareStatement("SELECT srowcol FROM seat WHERE cemail IS NULL and mname = ?");   

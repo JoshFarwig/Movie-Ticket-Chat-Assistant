@@ -87,32 +87,23 @@ chatbox.addActionListener(new ActionListener() {
             
             if (count == 1) {
                 email = g;
-                /*
+                
                 if (db.checkExistingCust(email)){
                     res("Welcome back!");
-                        custName = customers.get(i).getName();
-						custGender = customers.get(i).getGender();
+                    res2("Select a movie: ");
+                for (int i = 0; i < db.getAllMovies().size(); i++) {
+                    res2(i + 1 + ". " + db.getAllMovies().get(i) + " ");
+                }
+                    count = 4;
+                        //custName = customers.get(i).getName();
+						//custGender = customers.get(i).getGender();
                 }
                 else {
                    res("Welcome");
                         res("Please enter your name: ");
                         count++;
-						break;  
                 }
-                */
-
-                for (int i = 0; i < customers.size(); i++) {
-                    if (customers.get(i).getEmail().compareTo(g) == 0) {
-                        res("Welcome back!");
-                        custName = customers.get(i).getName();
-						custGender = customers.get(i).getGender();
-                    } else {
-                        res("Welcome");
-                        res("Please enter your name: ");
-                        count++;
-						break;
-                    }
-                }
+          
             }
             else if (count == 2) {
                 custName = g;
@@ -121,34 +112,17 @@ chatbox.addActionListener(new ActionListener() {
             }
             else if (count == 3) {
                 custGender = g.charAt(0); 
-                customers.add((new Customer(custName, 0, custGender, null, email)));
+                db.createCustomer(custName, custGender+ "", email);
                 res("Account created!");
                 res("Select a movie: ");
-                for (int i = 0; i < allMovies.size(); i++) {
-                    res2(i + 1 + ". " + allMovies.get(i).getMovieName() + " ");
-                count++;
+                for (int i = 0; i < db.getAllMovies().size(); i++) {
+                    res2(i + 1 + ". " + db.getAllMovies().get(i) + " ");
                 }
+                count++;
             }
             else if (count == 4) {
                 int mov = Integer.parseInt(g);
-                res("test");
-                boolean isValid = true;
-                Movie custMovie = null;
-                while (isValid) {
-                    // if valid
-                    if (mov <= allMovies.size() && mov > 0) {
-
-                        custMovie = allMovies.get(mov-1);
-                        movieName = custMovie.getMovieName();
-                        movieTime = custMovie.getReleaseDate() + " " + custMovie.getShowTime();
-                        res("Available Timings: " + movieTime);
-                        isValid = false;
-                        count++;
-                    } else {
-                        res("Invalid Input. Please try again: ");
-                        count = 4;
-                    }
-                }	
+               	res(db.showAvailableSeats(db.getAllMovies().get(mov).substring(0,db.getAllMovies().get(mov).indexOf(','))).toString());
 					}
             }
         }
