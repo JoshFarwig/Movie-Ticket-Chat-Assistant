@@ -148,6 +148,10 @@ public class Pathways {
 							System.out.println("Welcome back!");
 							custName = customers.get(i).getName();
 							custGender = customers.get(i).getGender();
+<<<<<<< HEAD
+=======
+							
+>>>>>>> c93abd28292f5cc648dd78f66a8dceb1924197e4
 							check =false;
 							break;
 						}
