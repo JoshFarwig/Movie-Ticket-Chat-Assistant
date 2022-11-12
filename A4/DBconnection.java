@@ -1,5 +1,3 @@
-
-
 import java.sql.*;
 import java.util.ArrayList;
 
@@ -34,12 +32,13 @@ public class DBconnection {
         } 
     }  
 
-    public void createCustomer(String name, String gender, String email) { 
+    public void createCustomer(String name, String gender, String email, String bdate) { 
         try{ 
-            PreparedStatement pstmt = con.prepareStatement("INSERT INTO customer(cname, gender, email) VALUES(?, ?, ?)"); 
+            PreparedStatement pstmt = con.prepareStatement("INSERT INTO customer(cname, gender, email) VALUES(?, ?, ?, ?)"); 
             pstmt.setString(1, name);  
             pstmt.setString(2, gender);  
-            pstmt.setString(3, email);  
+            pstmt.setString(3, email);    
+            pstmt.setString(3, bdate); 
             pstmt.execute(); 
         } catch (SQLException e) {
             System.out.println(e);
