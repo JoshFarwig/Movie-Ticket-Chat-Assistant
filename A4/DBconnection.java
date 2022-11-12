@@ -35,7 +35,7 @@ public class DBconnection {
 
     public void createCustomer(String name, String gender, String email, String bdate) { 
         try{ 
-            PreparedStatement pstmt = con.prepareStatement("INSERT INTO customer(cname, gender, email) VALUES(?, ?, ?, ?)"); 
+            PreparedStatement pstmt = con.prepareStatement("INSERT INTO customer(cname, gender, email, bdate) VALUES(?, ?, ?, ?)"); 
             pstmt.setString(1, name);  
             pstmt.setString(2, gender);  
             pstmt.setString(3, email);    
@@ -105,7 +105,7 @@ public class DBconnection {
             Statement stmt = con.createStatement();   
             ResultSet rs = stmt.executeQuery("SELECT * FROM movie");  
             while(rs.next()) { 
-                output.add(String.format("%s, %s, %s, %s",rs.getString("name"),rs.getString("genre"),rs.getString("releasedate"), rs.getString("duration"))); 
+                output.add(String.format("%s, Genre: %s, ReleaseDate: %s, Movie Duration: %s",rs.getString("name"),rs.getString("genre"),rs.getString("releasedate"), rs.getString("duration"))); 
             } 
             return output; 
         } catch (SQLException e){ 
