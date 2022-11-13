@@ -28,7 +28,8 @@ public class Bot extends JFrame {
     String custBdate = null;
     String seat = null;
     String email = "";
-    String confirm = "";
+    String confirm = ""; 
+    int seatid;
     int mov = 0;
     ActionEvent a;
 
@@ -161,13 +162,13 @@ public Bot(){
                     String [] thor = {"Thor: Love and Thunder", "Thor Love and Thunder","Thor love and thunder", "thor love and thunder", "Thor", "thor"};
                     
                     if(patternMatcher(b_adam, g)){
-                        mov =0;
+                        mov = 0;
                     }
                     else if (patternMatcher(smile, g)){
-                        mov =1;
+                        mov = 1;
                     }
                     else if (patternMatcher(thor, g)){
-                        mov =2;                
+                        mov = 2;                
                     }
                 count++;
                 b.setVisible(true);
@@ -181,8 +182,9 @@ public Bot(){
 			}
             else if (count == 6) {
                 seat = g;
-                res(seat);
-                db.chooseSeat(email, movieName, seat);
+                res(seat); 
+                db.chooseSeat(email, movieName, seat); 
+                seatid = db.getSeatID(email, movieName); 
                 res("Seat selected successfully!");
                 res("Confirm your booking: (y/n)");
                 b.setText("Yes");
@@ -224,7 +226,7 @@ public Bot(){
                 }
                 else {
                     res("Here is your ticket summary: ");
-                    //db.getmovSummary();
+                    res(db.showMovieTicket(db.getMovieTicketID(email)));
                     res("What would you like to change");
                     b.setText("Movie");
                     b.setVisible(true);
@@ -311,7 +313,6 @@ b.addActionListener(new ActionListener() {
             b.setText("Cancel");
             b.setVisible(true);
             
-
             }
             else if(b.getText().equals("Yes")){
                 confirm = "y";
