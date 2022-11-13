@@ -6,9 +6,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.GregorianCalendar;
 import java.util.Scanner;
-import static org.kl.jpml.pattern.ConstantPattern.*;
 import javax.swing.*;
-import org.kl.jpml.state.Else;
 
 
 public class Bot extends JFrame {
@@ -20,7 +18,7 @@ public class Bot extends JFrame {
     private JButton c = new JButton("Cancel");
     DBconnection db = new DBconnection(); 
 
-    
+
 
     String g = "";
     int count = 0;
@@ -83,6 +81,16 @@ public Bot(){
             g = chatbox.getText();
             if (!g.equals("")){Chatarea.append("You: " + g + "\n");}
             chatbox.setText("");
+
+            if(count==0){
+                String [] listMovie = {"List all movies", "Recommedations", "Recommend movies", "Recommend", "All movies", "List movies"};
+                if(patternMatcher(listMovie, g)){
+                    for (int i = 0; i < db.getAllMovies().size(); i++) {
+                        res2(i + 1 + ". " + db.getAllMovies().get(i) + " ");
+                }
+                }
+                
+            }
             
             if (count == 1) {
                 email = g;
