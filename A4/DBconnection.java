@@ -199,13 +199,13 @@ public class DBconnection {
         }
     }   
     
-    public String getSeatPos(String email, String movie) {  
+    public String getSeatID(String email, String movie) {  
         try { 
-            PreparedStatement pstmt = con.prepareStatement("SELECT srowcol FROM seat WHERE cemail = ? and mname = ?"); 
+            PreparedStatement pstmt = con.prepareStatement("SELECT sid FROM seat WHERE cemail = ? and mname = ?"); 
             pstmt.setString(1, email); 
             pstmt.setString(2, movie); 
             ResultSet rs = pstmt.executeQuery(); rs.next();
-            return rs.getString("srowcol");
+            return rs.getString("sid");
         } catch (SQLException e) { 
             System.out.println(e);
             return "no seat found";
