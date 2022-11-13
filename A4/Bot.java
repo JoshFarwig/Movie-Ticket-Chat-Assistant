@@ -149,21 +149,21 @@ public Bot(){
                 res("Select a movie: ");
                 for (int i = 0; i < db.getAllMovies().size(); i++) {
                         res2(db.getAllMovies().get(i) + " ");
-                }
+                    }
 
-                String [] b_adam = {"Black Adam", "black adam", "black Adam"};
-                String [] smile =  {"Smile", "smile"}; 
-                String [] thor = {"Thor: Love and Thunder", "Thor Love and Thunder","Thor love and thunder", "thor love and thunder", "Thor", "thor"};
-                
-                if(patternMatcher(b_adam, g)){
-                    mov =0;
-                }
-                else if (patternMatcher(smile, g)){
-                    mov =1;
-                }
-                else if (patternMatcher(thor, g)){
-                    mov =2;
-                }
+                    String [] b_adam = {"Black Adam", "black adam", "black Adam"};
+                    String [] smile =  {"Smile", "smile"}; 
+                    String [] thor = {"Thor: Love and Thunder", "Thor Love and Thunder","Thor love and thunder", "thor love and thunder", "Thor", "thor"};
+                    
+                    if(patternMatcher(b_adam, g)){
+                        mov =0;
+                    }
+                    else if (patternMatcher(smile, g)){
+                        mov =1;
+                    }
+                    else if (patternMatcher(thor, g)){
+                        mov =2;                
+                    }
                 count++;
                 b.setVisible(true);
             }
@@ -192,7 +192,7 @@ public Bot(){
                 confirm = g;
                 if (confirm.equals("y")){
                     db.createMovieTicket(email, movieName, seat, "");
-                    Email send = new Email(email,"Movie Booking Confirmation", "Thank you for your order! Your ticket ID is : " + db.getMovieTicketID(email, movieName) + "\nOrder Summary\nCustomer Information\n\tName: " + custName + "\n\tEmail: " + email + "\n\tGender: " + custGender + "\nBooking Confirmation\n\tMovie Name: " + movieName + "\nMovie Time: " + "\nYour Selected Seat: " + seat);
+                    Email send = new Email(email,"Movie Booking Confirmation", "Thank you for your order! Your ticket ID is : " + db.getMovieTicketID(email) + "\nOrder Summary\nCustomer Information\n\tName: " + custName + "\n\tEmail: " + email + "\n\tGender: " + custGender + "\nBooking Confirmation\n\tMovie Name: " + movieName + "\nMovie Time: " + "\nYour Selected Seat: " + seat);
                     res("The receipt has been sent to your email.");
                     b.setVisible(true);
                 }
@@ -209,7 +209,45 @@ public Bot(){
             }
 
             else if (count == 8){
-                
+                if (db.getMovieTicketID(email) == -1){
+                    res("You do not have a ticket registered to this email. \nHow else can I be of assistance? ");
+                    b.setText("Book a Ticket");
+                    b2.setText("Amend your booking");
+                    b.setVisible(true);
+                    b2.setVisible(true);
+                    b3.setVisible(true);
+                }
+                else {
+                    res("Here is your ticket summary: ");
+                    //db.getmovSummary();
+                    res("What would you like to change");
+                    b.setText("Movie");
+                    b.setVisible(true);
+                    b2.setText("Seat");
+                    b2.setVisible(true);
+                    b3.setVisible(false);
+                }
+            }
+            //deleting a movie ticket
+            else if (count == 10){
+                if (db.getMovieTicketID(email) == -1){
+                    res("You do not have a ticket registered to this email. \nCan I help you with anything else?");
+                    b.setText("Book a Ticket");
+                    b2.setText("Amend your booking");
+                    b.setVisible(true);
+                    b2.setVisible(true);
+                    b3.setVisible(true);
+                }
+                else {
+                    res("Here is your ticket summary: ");
+                    //db.getmovSummary();
+                    res("Are you sure you want to delete your booking? ");
+                    b.setText("Delete");
+                    b.setVisible(true);
+                    b2.setText("Keep");
+                    b2.setVisible(true);
+                    b3.setVisible(false);
+                }
             }
             } 
         
@@ -231,9 +269,27 @@ b.addActionListener(new ActionListener() {
                 b3.setVisible(true);
                 b.setVisible(true);
             }
+            else if (b.getText().equals("Delete")){
+                db.deleteMovieTicket(email, movieName);
+                res("Booking deleted!");
+                b.setText("Book a Ticket");
+                b2.setText("Amend your booking");
+                b.setVisible(true);
+                b2.setVisible(true);
+                b3.setVisible(true);
+                res2("How else can I help you?");
+            }
+            else if (b.getText().equals("Movie")){
+                b.setText("Cancel");
+                b.setVisible(true);
+                b2.setText("Amend your booking");
+                count = 9;
+                b2.setVisible(false);
+
+            }          
             else if (b.getText().equals("Book a Ticket")){
-            count++;
             b.setText("Cancel");
+            count = 1;
             b2.setVisible(false);
             b3.setVisible(false);
             b.setVisible(true);
@@ -242,8 +298,9 @@ b.addActionListener(new ActionListener() {
             String email = g;
             }
             else if (b.getText().equals("Male")){
-            count = 3;
+            count = 4;
             custGender = 'M';
+            res("Please enter your birth date: (mm/dd/yyyy)");
             b2.setText("Amend your booking");
             b2.setVisible(false);
             b.setText("Cancel");
@@ -255,8 +312,9 @@ b.addActionListener(new ActionListener() {
                 confirm = "y";
                 count = 7;
                 db.createMovieTicket(email, movieName, seat, "");
-                    Email send = new Email(email,"Movie Booking Confirmation", "Thank you for your order! Your ticket ID is : " + db.getMovieTicketID(email, movieName) + "\nOrder Summary\nCustomer Information\n\tName: " + custName + "\n\tEmail: " + email + "\n\tGender: " + custGender + "\nBooking Confirmation\n\tMovie Name: " + movieName + "\nMovie Time: " + "\nYour Selected Seat: " + seat);
+                    Email send = new Email(email,"Movie Booking Confirmation", "Thank you for your order! Your ticket ID is : " + db.getMovieTicketID(email) + "\nOrder Summary\nCustomer Information\n\tName: " + custName + "\n\tEmail: " + email + "\n\tGender: " + custGender + "\nBooking Confirmation\n\tMovie Name: " + movieName + "\nMovie Time: " + "\nYour Selected Seat: " + seat);
                     res("The receipt has been sent to your email.");
+                    res2("Can I help you with anything else?");
                 b.setText("Book a Ticket");
                 b2.setText("Amend your booking");
                 b.setVisible(true);
@@ -271,13 +329,23 @@ b.addActionListener(new ActionListener() {
 b2.addActionListener(new ActionListener(){
         public void actionPerformed(ActionEvent e){
             if(b2.getText().equals("Female")){
-                count = 3;
+                count = 4;
                 custGender = 'F';
+                res("Please enter your birth date: (mm/dd/yyyy)");
                 b2.setText("Amend your booking");
                 b2.setVisible(false);
                 b.setText("Cancel");
                 b.setVisible(true);
                
+            }
+            else if(b2.getText().equals("Keep")) {
+                count = 0;
+                b.setText("Book a Ticket");
+                b2.setText("Amend your booking");
+                b.setVisible(true);
+                b.setVisible(true);
+                b.setVisible(true);
+                res2("How else can I help you?");
             }
             else if(b2.getText().equals("Amend your booking")){
                 b.setText("Cancel");
@@ -285,6 +353,7 @@ b2.addActionListener(new ActionListener(){
                 b2.setVisible(false);
                 b3.setVisible(false);
                 res("Sure, I can help you with that. Please enter your email: ");
+                count = 8;
             }
             else if(b2.getText().equals("No")){
                 count = 0;
@@ -297,6 +366,20 @@ b2.addActionListener(new ActionListener(){
                 b3.setVisible(true);
             }
         }
+});
+
+b3.addActionListener(new ActionListener(){
+    public void actionPerformed(ActionEvent e){
+        if (b3.getText().equals("Cancel your booking")){
+            res("Enter your email: ");
+            b.setText("Cancel");
+            b.setVisible(true);
+            b2.setVisible(false);
+            b3.setVisible(false);
+            count = 10;
+        }
+}
+
 });
 
 
