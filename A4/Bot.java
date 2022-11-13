@@ -126,6 +126,10 @@ public Bot(){
                 if (custGender == 0) {custGender = g.charAt(0); }
                 res("Please enter your birth date: (mm/dd/yyyy)");
                 count++;
+                b.setText("Cancel");
+                b.setVisible(true);
+                b2.setText("Amend your booking");
+                b2.setVisible(false);
             }
             else if (count == 4) {
                 custBdate = g;
@@ -141,7 +145,7 @@ public Bot(){
                 mov = Integer.parseInt(g);
                 movieName = db.getAllMovies().get(mov-1).substring(0,db.getAllMovies().get(mov-1).indexOf(',')).toString();
                 res("Select your seat: ");
-                res2(db.showAvailableSeats(db.getAllMovies().get(mov).substring(0,db.getAllMovies().get(mov).indexOf(','))).toString());
+                res2(db.showAvailableSeats(db.getAllMovies().get(mov-1).substring(0,db.getAllMovies().get(mov-1).indexOf(','))).toString());
                 count++;
 			}
             else if (count == 6) {
@@ -150,6 +154,9 @@ public Bot(){
                 db.chooseSeat(email, movieName, seat);
                 res("Seat selected successfully!");
                 res("Confirm your booking: (y/n)");
+                b.setText("Yes");
+                b2.setText("No");
+                b2.setVisible(true);
                 res2("\nOrder Summary\nCustomer Information\n\tName: " + custName + "\n\tEmail: " + email + "\n\tGender: " + custGender + "\nBooking Confirmation\n\tMovie Name: " + movieName +  "\nYour Selected Seat: " + seat);
                 count++;
             }
@@ -162,7 +169,13 @@ public Bot(){
                     res("The receipt has been sent to your email.");
                 }
                 else if (confirm.equals("n")){
-
+                    count = 0;
+                    res("How can I help you?");
+                    b2.setText("Amend your booking");
+                    b.setText("Book a Ticket");
+                    b.setVisible(true);
+                    b2.setVisible(true);
+                    b3.setVisible(true);
                 }
             }
 
@@ -204,6 +217,18 @@ b.addActionListener(new ActionListener() {
             
 
             }
+            else if(b.getText().equals("Yes")){
+                confirm = "y";
+                count = 7;
+                db.createMovieTicket(email, movieName, seat, "");
+                    Email send = new Email(email,"Movie Booking Confirmation", "Thank you for your order! Your ticket ID is : " + db.getMovieTicketID(email, movieName) + "\nOrder Summary\nCustomer Information\n\tName: " + custName + "\n\tEmail: " + email + "\n\tGender: " + custGender + "\nBooking Confirmation\n\tMovie Name: " + movieName + "\nMovie Time: " + "\nYour Selected Seat: " + seat);
+                    res("The receipt has been sent to your email.");
+                b.setText("Book a Ticket");
+                b2.setText("Amend your booking");
+                b.setVisible(true);
+                b2.setVisible(true);
+                b3.setVisible(true);
+            }
            }
         
         });
@@ -224,6 +249,15 @@ b2.addActionListener(new ActionListener(){
                 b2.setVisible(false);
                 b3.setVisible(false);
                 res("Sure, I can help you with that. Please enter your email: ");
+            }
+            else if(b2.getText().equals("No")){
+                count = 0;
+                res("How can I help you?");
+                b2.setText("Amend your booking");
+                b.setText("Book a Ticket");
+                b.setVisible(true);
+                b2.setVisible(true);
+                b3.setVisible(true);
             }
         }
 });
