@@ -50,7 +50,7 @@ public class DBconnection {
         try{ 
             PreparedStatement pstmt = con.prepareStatement("SELECT gender FROM customer WHERE email = ?"); 
             pstmt.setString(1, email); 
-            ResultSet rs = rs.executeQuery(); rs.next(); 
+            ResultSet rs = pstmt.executeQuery(); rs.next(); 
             return rs.getString("gender");
         } catch (SQLException e) {
             System.out.println(e); 
@@ -62,7 +62,7 @@ public class DBconnection {
           try{ 
             PreparedStatement pstmt = con.prepareStatement("SELECT name FROM customer WHERE email = ?"); 
             pstmt.setString(1, email); 
-            ResultSet rs = rs.executeQuery(); rs.next(); 
+            ResultSet rs = pstmt.executeQuery(); rs.next(); 
             return rs.getString("name");
         } catch (SQLException e) {
             System.out.println(e); 

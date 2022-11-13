@@ -42,7 +42,7 @@ public Bot(){
     frame.setDefaultCloseOperation(EXIT_ON_CLOSE);
     frame.setVisible(true);
     frame.setResizable(false);
-    frame.setSize(600, 800);
+    frame.setSize(600, 600);
     frame.setTitle("Virtual Assistant");
    
    
@@ -57,21 +57,21 @@ public Bot(){
     JScrollPane sp = new JScrollPane(Chatarea, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED,JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
     frame.add(sp);
 
-    Chatarea.setSize(500,600);  
+    Chatarea.setSize(500,400);  
     Chatarea.setEditable(false);
     Chatarea.setLocation(2,2);
 
     chatbox.setSize(580,50);
-    chatbox.setLocation(2,674);
+    chatbox.setLocation(2,474);
 
     b.setSize(198,70);
-    b.setLocation(2, 602);
+    b.setLocation(2, 402);
 
     b2.setSize(198,70);
-    b2.setLocation(202, 602);
+    b2.setLocation(202, 402);
 
     b3.setSize(198,70);
-    b3.setLocation(402, 602);
+    b3.setLocation(402, 402);
 
     //Actions
 
