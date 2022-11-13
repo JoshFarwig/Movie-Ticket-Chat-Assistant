@@ -87,19 +87,40 @@ public class DBconnection {
             System.out.println(e);
         }
     }
-    
-   /*  public ArrayList<String> showMovieTicket(String email, String movie) { 
-        ArrayList<String> output = new ArrayList<>();  
+     
+    public String showMovieTicket(int movieticketid) {  
         try{   
-            PreparedStatement pstmt = con.prepareStatement("SELECT"); 
-            pstmt.setString(1, email);  
-            pstmt.setString(2, movie);  
+            PreparedStatement pstmt = con.prepareStatement("SELECT mt.mtid, m.name, m.dateofmovie, m.timeofmovie, s.rowcol, mt.totalPrice FROM movieticket mt JOIN movie m ON mt.mname = m.name JOIN seat s ON mt.seatID = s.sid WHERE mtid = ?"); 
+            pstmt.setInt(1, movieticketid);  
+            ResultSet rs = pstmt.executeQuery(); rs.next();  
+            return String.format("TicketID: %d, Movie: %s Date: %s Time: %s Seat: %s Ticket Cost: %d", rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getDouble(6)); 
+        } catch (SQLException e) {
+            System.out.println(e); 
+            return "You do not have a movieticket!";
+        } 
+    }  
+
+    public void updateMovieInTicket(int movieticketid, String movie) { 
+        try{   
+            PreparedStatement pstmt = con.prepareStatement("UPDATE movieticket SET mname = ? WHERE mtid = ?"); 
+            pstmt.setString(2, movie);
+            pstmt.setInt(2, movieticketid);  
             pstmt.execute(); 
         } catch (SQLException e) {
-            System.out.println(e);
-        }
+            System.out.println(e); 
+        } 
+    }
 
-    }  */
+    public void updateSeatInTicket(int movieticketid, int seatid) { 
+        try{   
+            PreparedStatement pstmt = con.prepareStatement("UPDATE movieticket SET seatID = ? WHERE mtid = ? "); 
+            pstmt.setInt(2, seatid);
+            pstmt.setInt(2, movieticketid);  
+            pstmt.execute(); 
+        } catch (SQLException e) {
+            System.out.println(e); 
+        } 
+    }
 
     public void deleteMovieTicket(String email, String movie) {  
         try{   
@@ -187,27 +208,26 @@ public class DBconnection {
         }
     } 
     
-    public void unselectSeat(String email, String movie) { 
+    public void unselectSeat(int seatid) { 
         try { 
-            PreparedStatement pstmt = con.prepareStatement("UPDATE seat SET cemail = NULL WHERE mname = ? and cemail = ?"); 
-            pstmt.setString(1, movie); 
-            pstmt.setString(2, email); 
+            PreparedStatement pstmt = con.prepareStatement("UPDATE seat SET cemail = NULL WHERE sid = ?"); 
+            pstmt.setInt(1, seatid); 
             pstmt.execute(); 
         } catch (SQLException e) { 
             System.out.println(e);
         }
-    }   
+    }    
     
-    public String getSeatID(String email, String movie) {  
+    public int getSeatID(String email, String movie) {  
         try { 
             PreparedStatement pstmt = con.prepareStatement("SELECT sid FROM seat WHERE cemail = ? and mname = ?"); 
             pstmt.setString(1, email); 
             pstmt.setString(2, movie); 
             ResultSet rs = pstmt.executeQuery(); rs.next();
-            return rs.getString("sid");
+            return rs.getInt("sid");
         } catch (SQLException e) { 
             System.out.println(e);
-            return "no seat found";
+            return -1;
         }
     
     }
