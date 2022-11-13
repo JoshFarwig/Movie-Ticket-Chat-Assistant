@@ -5,6 +5,7 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.GregorianCalendar;
 import java.util.Scanner;
+import static org.kl.jpml.pattern.ConstantPattern.*;
 import javax.swing.*;
 
 
@@ -16,6 +17,7 @@ public class Bot extends JFrame {
     private JButton b3 = new JButton("Cancel your booking");
     private JButton c = new JButton("Cancel");
     DBconnection db = new DBconnection(); 
+    char custGender;
     
     String g = "";
     int count = 0;
@@ -60,7 +62,7 @@ public Bot(){
     //Actions
 chatbox.addActionListener(new ActionListener() {
             String custName = null;
-			char custGender = 0;
+			custGender = 0;
 			String movieName = null;
             String custBdate = null;
             String seat = null;
@@ -98,6 +100,7 @@ chatbox.addActionListener(new ActionListener() {
             else if (count == 2) {
                 custName = g;
                 res("Please enter your gender: (M/F)");
+                patternMatcher(g);
                 count++;
             }
             else if (count == 3) {
@@ -193,4 +196,21 @@ public static void main(String[] args) {
     
 }
 
+
+public void patternMatcher(String input){
+    String[] maleNames = {"Male","M","Man"};
+    String[] femaleNames = {"Female","F","Woman"};
+    for(String n: maleNames){
+        if(input.equalsIgnoreCase(n)){
+            custGender = 'M';
+        }
+    }
+    for(String n: femaleNames){
+        if(input.equalsIgnoreCase(n)){
+            custGender = 'F';
+        }
+    }
+
 }
+}
+
