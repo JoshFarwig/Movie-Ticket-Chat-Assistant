@@ -32,7 +32,7 @@ CREATE TABLE movieticket(
     seatID int,
     totalPrice decimal(8,2),
     PRIMARY KEY(mtid), 
-    FORIEGN KEY(seatID) references seat(id)
+    FOREIGN KEY(seatID) references seat(id)
 );
 
 /* CREATE TABLE movietimes(
