@@ -112,11 +112,10 @@ public class DBconnection {
         } 
     } 
 
-    public int getMovieTicketID(String email, String movie) {   
+    public int getMovieTicketID(String email) {   
         try{    
-            PreparedStatement pstmt = con.prepareStatement("SELECT mtid FROM movieticket WHERE cemail = ? and mname = ?"); 
+            PreparedStatement pstmt = con.prepareStatement("SELECT mtid FROM movieticket WHERE cemail = ?"); 
             pstmt.setString(1, email);  
-            pstmt.setString(2, movie);  
             ResultSet rs = pstmt.executeQuery(); rs.next(); 
             return rs.getInt("mtid"); 
         } catch (SQLException e) {
