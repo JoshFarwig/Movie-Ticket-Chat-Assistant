@@ -105,11 +105,12 @@ chatbox.addActionListener(new ActionListener() {
             }
             else if (count == 3) {
                 custGender = g.charAt(0); 
-                res("Please enter your birth date: (yyyy-mm-dd)");
+                res("Please enter your birth date: (mm/dd/yyyy)");
                 count++;
             }
             else if (count == 4) {
                 custBdate = g;
+                res2(custBdate);
                 db.createCustomer(custName, custGender+ "", email, custBdate);
                 res("Account created!");
                 res("Select a movie: ");
@@ -122,7 +123,7 @@ chatbox.addActionListener(new ActionListener() {
                 mov = Integer.parseInt(g);
                 movieName = db.getAllMovies().get(mov-1).substring(0,db.getAllMovies().get(mov-1).indexOf(',')).toString();
                 res("Select your seat: ");
-                res2(db.showAvailableSeats(db.getAllMovies().get(mov).substring(0,db.getAllMovies().get(mov).indexOf(','))).toString());
+                res2(db.showAvailableSeats(db.getAllMovies().get(mov-1).substring(0,db.getAllMovies().get(mov-1).indexOf(','))).toString());
                 count++;
 			}
             else if (count == 6) {

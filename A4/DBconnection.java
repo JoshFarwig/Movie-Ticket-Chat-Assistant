@@ -35,16 +35,40 @@ public class DBconnection {
 
     public void createCustomer(String name, String gender, String email, String bdate) { 
         try{ 
-            PreparedStatement pstmt = con.prepareStatement("INSERT INTO customer(cname, gender, email, bdate) VALUES(?, ?, ?, ?)"); 
+            PreparedStatement pstmt = con.prepareStatement("INSERT INTO customer(name, gender, email, bdate) VALUES(?, ?, ?, ?)"); 
             pstmt.setString(1, name);  
             pstmt.setString(2, gender);  
             pstmt.setString(3, email);    
-            pstmt.setString(3, bdate); 
+            pstmt.setString(4, bdate); 
             pstmt.execute(); 
         } catch (SQLException e) {
             System.out.println(e);
         }
-    } 
+    }  
+    
+    public String getCustGender(String email) { 
+        try{ 
+            PreparedStatement pstmt = con.prepareStatement("SELECT gender FROM customer WHERE email = ?"); 
+            pstmt.setString(1, email); 
+            ResultSet rs = rs.executeQuery(); rs.next(); 
+            return rs.getString("gender");
+        } catch (SQLException e) {
+            System.out.println(e); 
+            return "couldn't get custgender";
+        }
+    }
+    
+    public String getCustName(String email) {  
+          try{ 
+            PreparedStatement pstmt = con.prepareStatement("SELECT name FROM customer WHERE email = ?"); 
+            pstmt.setString(1, email); 
+            ResultSet rs = rs.executeQuery(); rs.next(); 
+            return rs.getString("name");
+        } catch (SQLException e) {
+            System.out.println(e); 
+            return "couldn't get custname";
+        }
+    }
 
     public void createMovieTicket(String email, String movie, String seatpos, String movietime) {  
         try{   
@@ -52,7 +76,7 @@ public class DBconnection {
             getMoviecost.setString(1, movie); 
             ResultSet rs = getMoviecost.executeQuery();  rs.next();  
             double cost = rs.getDouble("cost"); 
-            PreparedStatement pstmt = con.prepareStatement("INSERT INTO movieticket(cemail, mname, seatpos, movtime, totalCost) VALUES(?, ?, ?, ?, ?)"); 
+            PreparedStatement pstmt = con.prepareStatement("INSERT INTO movieticket(cemail, mname, seatpos, movtime, totalPrice) VALUES(?, ?, ?, ?, ?)"); 
             pstmt.setString(1, email);  
             pstmt.setString(2, movie);   
             pstmt.setString(3, seatpos);  
