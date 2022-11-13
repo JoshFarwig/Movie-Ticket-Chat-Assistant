@@ -156,21 +156,21 @@ public Bot(){
                 String [] thor = {"Thor: Love and Thunder", "Thor Love and Thunder","Thor love and thunder", "thor love and thunder", "Thor", "thor"};
                 
                 if(patternMatcher(b_adam, g)){
-                    mov =1;
+                    mov =0;
                 }
                 else if (patternMatcher(smile, g)){
-                    mov =2;
+                    mov =1;
                 }
                 else if (patternMatcher(thor, g)){
-                    mov =3;
+                    mov =2;
                 }
                 count++;
                 b.setVisible(true);
             }
             else if (count == 5) {
-                movieName = db.getAllMovies().get(mov-1).substring(0,db.getAllMovies().get(mov-1).indexOf(',')).toString();
+                movieName = db.getAllMovies().get(mov).substring(0,db.getAllMovies().get(mov).indexOf(',')).toString();
                 res("Select your seat: ");
-                res2(db.showAvailableSeats(db.getAllMovies().get(mov-1).substring(0,db.getAllMovies().get(mov-1).indexOf(','))).toString());
+                res2(db.showAvailableSeats(db.getAllMovies().get(mov).substring(0,db.getAllMovies().get(mov).indexOf(','))).toString());
                 count++;
                 b.setVisible(true);
 			}
