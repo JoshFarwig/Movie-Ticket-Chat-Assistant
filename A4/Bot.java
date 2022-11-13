@@ -98,19 +98,20 @@ public Bot(){
                 if (db.checkExistingCust(email)){
                     res("Welcome back!");
                     res2("Select a movie: ");
-                    //custGender = db.getCusGender
-                    //custGender = db.getCusName
+                    custGender = db.getCustGender(email).charAt(0);
+                    custName = db.getCustName(email);
                     for (int i = 0; i < db.getAllMovies().size(); i++) {
                         res2(i + 1 + ". " + db.getAllMovies().get(i) + " ");
                        
                 }
                 count = 5;
+                b.setVisible(true);
                 }
                 else {
                    res("Welcome");
                         res("Please enter your name: ");
                         count++;
-						
+                        b.setVisible(true);		
                 }
                
             }
@@ -129,11 +130,17 @@ public Bot(){
                 b2.setVisible(true);
                 b.setText("Male");
                 b2.setText("Female");
+                b.setVisible(true);
             }
             else if (count == 3) {
                 if (custGender == 0) {custGender = g.charAt(0); }
                 res("Please enter your birth date: (mm/dd/yyyy)");
                 count++;
+                b.setText("Cancel");
+                b.setVisible(true);
+                b2.setText("Amend your booking");
+                b2.setVisible(false);
+                b.setVisible(true);
             }
             else if (count == 4) {
                 custBdate = g;
@@ -158,12 +165,14 @@ public Bot(){
                     mov =3;
                 }
                 count++;
+                b.setVisible(true);
             }
             else if (count == 5) {
                 movieName = db.getAllMovies().get(mov-1).substring(0,db.getAllMovies().get(mov-1).indexOf(',')).toString();
                 res("Select your seat: ");
-                res2(db.showAvailableSeats(db.getAllMovies().get(mov).substring(0,db.getAllMovies().get(mov).indexOf(','))).toString());
+                res2(db.showAvailableSeats(db.getAllMovies().get(mov-1).substring(0,db.getAllMovies().get(mov-1).indexOf(','))).toString());
                 count++;
+                b.setVisible(true);
 			}
             else if (count == 6) {
                 seat = g;
@@ -171,8 +180,12 @@ public Bot(){
                 db.chooseSeat(email, movieName, seat);
                 res("Seat selected successfully!");
                 res("Confirm your booking: (y/n)");
+                b.setText("Yes");
+                b2.setText("No");
+                b2.setVisible(true);
                 res2("\nOrder Summary\nCustomer Information\n\tName: " + custName + "\n\tEmail: " + email + "\n\tGender: " + custGender + "\nBooking Confirmation\n\tMovie Name: " + movieName +  "\nYour Selected Seat: " + seat);
                 count++;
+                b.setVisible(true);
             }
 
             else if (count == 7) {
@@ -181,9 +194,17 @@ public Bot(){
                     db.createMovieTicket(email, movieName, seat, "");
                     Email send = new Email(email,"Movie Booking Confirmation", "Thank you for your order! Your ticket ID is : " + db.getMovieTicketID(email, movieName) + "\nOrder Summary\nCustomer Information\n\tName: " + custName + "\n\tEmail: " + email + "\n\tGender: " + custGender + "\nBooking Confirmation\n\tMovie Name: " + movieName + "\nMovie Time: " + "\nYour Selected Seat: " + seat);
                     res("The receipt has been sent to your email.");
+                    b.setVisible(true);
                 }
                 else if (confirm.equals("n")){
-
+                    count = 0;
+                    Chatarea.setText("");
+                    res("How can I help you?");
+                    b2.setText("Amend your booking");
+                    b.setText("Book a Ticket");
+                    b.setVisible(true);
+                    b2.setVisible(true);
+                    b3.setVisible(true);
                 }
             }
 
@@ -204,14 +225,18 @@ b.addActionListener(new ActionListener() {
                 b.setText("Book a Ticket");
                 count = 0;
                 res("Returning to main menu.");
+                Chatarea.setText("");
+                res("Can I help you with anything else?");
                 b2.setVisible(true);
                 b3.setVisible(true);
+                b.setVisible(true);
             }
             else if (b.getText().equals("Book a Ticket")){
             count++;
             b.setText("Cancel");
             b2.setVisible(false);
             b3.setVisible(false);
+            b.setVisible(true);
 
             res("Okay, I can help you with that. \nEnter your email: ");
             String email = g;
@@ -222,8 +247,21 @@ b.addActionListener(new ActionListener() {
             b2.setText("Amend your booking");
             b2.setVisible(false);
             b.setText("Cancel");
+            b.setVisible(true);
             
 
+            }
+            else if(b.getText().equals("Yes")){
+                confirm = "y";
+                count = 7;
+                db.createMovieTicket(email, movieName, seat, "");
+                    Email send = new Email(email,"Movie Booking Confirmation", "Thank you for your order! Your ticket ID is : " + db.getMovieTicketID(email, movieName) + "\nOrder Summary\nCustomer Information\n\tName: " + custName + "\n\tEmail: " + email + "\n\tGender: " + custGender + "\nBooking Confirmation\n\tMovie Name: " + movieName + "\nMovie Time: " + "\nYour Selected Seat: " + seat);
+                    res("The receipt has been sent to your email.");
+                b.setText("Book a Ticket");
+                b2.setText("Amend your booking");
+                b.setVisible(true);
+                b2.setVisible(true);
+                b3.setVisible(true);
             }
            }
         
@@ -238,13 +276,25 @@ b2.addActionListener(new ActionListener(){
                 b2.setText("Amend your booking");
                 b2.setVisible(false);
                 b.setText("Cancel");
+                b.setVisible(true);
                
             }
             else if(b2.getText().equals("Amend your booking")){
                 b.setText("Cancel");
+                b.setVisible(true);
                 b2.setVisible(false);
                 b3.setVisible(false);
                 res("Sure, I can help you with that. Please enter your email: ");
+            }
+            else if(b2.getText().equals("No")){
+                count = 0;
+                Chatarea.setText("");
+                res("How can I help you?");
+                b2.setText("Amend your booking");
+                b.setText("Book a Ticket");
+                b.setVisible(true);
+                b2.setVisible(true);
+                b3.setVisible(true);
             }
         }
 });
