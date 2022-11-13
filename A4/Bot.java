@@ -3,10 +3,13 @@ import java.awt.LayoutManager;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.GregorianCalendar;
 import java.util.Scanner;
 import static org.kl.jpml.pattern.ConstantPattern.*;
 import javax.swing.*;
+import org.apache.commons.lang.StringUtils;
+import org.kl.jpml.state.Else;
 
 
 public class Bot extends JFrame {
@@ -17,7 +20,6 @@ public class Bot extends JFrame {
     private JButton b3 = new JButton("Cancel your booking");
     private JButton c = new JButton("Cancel");
     DBconnection db = new DBconnection(); 
-    char custGender;
     
     String g = "";
     int count = 0;
@@ -62,7 +64,7 @@ public Bot(){
     //Actions
 chatbox.addActionListener(new ActionListener() {
             String custName = null;
-			custGender = 0;
+			char custGender = 0;
 			String movieName = null;
             String custBdate = null;
             String seat = null;
@@ -98,19 +100,25 @@ chatbox.addActionListener(new ActionListener() {
                
             }
             else if (count == 2) {
+                String[] maleOptions = {"M","m","Man","man","Male","male"};
+                String[] femaleOptions = {"F","f","Female","female","Woman","woman"};
                 custName = g;
                 res("Please enter your gender: (M/F)");
-                patternMatcher(g);
+                if(patternMatcher(maleOptions, g))
+                custGender = 'M';
+                else if(patternMatcher(femaleOptions,g))
+                custGender = 'F';
+                else 
+                custGender = 'X';
                 count++;
             }
             else if (count == 3) {
                 custGender = g.charAt(0); 
-                res("Please enter your birth date: (mm/dd/yyyy)");
+                res("Please enter your birth date: (yyyy-mm-dd)");
                 count++;
             }
             else if (count == 4) {
                 custBdate = g;
-                res2(custBdate);
                 db.createCustomer(custName, custGender+ "", email, custBdate);
                 res("Account created!");
                 res("Select a movie: ");
@@ -123,7 +131,7 @@ chatbox.addActionListener(new ActionListener() {
                 mov = Integer.parseInt(g);
                 movieName = db.getAllMovies().get(mov-1).substring(0,db.getAllMovies().get(mov-1).indexOf(',')).toString();
                 res("Select your seat: ");
-                res2(db.showAvailableSeats(db.getAllMovies().get(mov-1).substring(0,db.getAllMovies().get(mov-1).indexOf(','))).toString());
+                res2(db.showAvailableSeats(db.getAllMovies().get(mov).substring(0,db.getAllMovies().get(mov).indexOf(','))).toString());
                 count++;
 			}
             else if (count == 6) {
@@ -198,19 +206,9 @@ public static void main(String[] args) {
 }
 
 
-public void patternMatcher(String input){
-    String[] maleNames = {"Male","M","Man"};
-    String[] femaleNames = {"Female","F","Woman"};
-    for(String n: maleNames){
-        if(input.equalsIgnoreCase(n)){
-            custGender = 'M';
-        }
-    }
-    for(String n: femaleNames){
-        if(input.equalsIgnoreCase(n)){
-            custGender = 'F';
-        }
-    }
+public boolean patternMatcher(String[] pattern, String input){
+    
+return Arrays.stream(pattern).anyMatch(input::contains);
 
 }
 }
