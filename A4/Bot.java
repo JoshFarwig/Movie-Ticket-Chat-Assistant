@@ -82,15 +82,20 @@ public Bot(){
             if (!g.equals("")){Chatarea.append("You: " + g + "\n");}
             chatbox.setText("");
 
-            if(count==0){
                 String [] listMovie = {"List all movies", "Recommedations", "Recommend movies", "Recommend", "All movies", "List movies"};
                 if(patternMatcher(listMovie, g)){
                     for (int i = 0; i < db.getAllMovies().size(); i++) {
                         res2(i + 1 + ". " + db.getAllMovies().get(i).substring(0,db.getAllMovies().get(i).indexOf(",")) + " ");
                 }
                 }
-                
-            }
+
+                String [] contactOptions = {"Contact", "contact", "Contact Information", "Contact information", "contact information", "Contact Us", "Contact us","contact us", "Phone Number", "Phone number","phone number", "Location", "location"};     
+                if(patternMatcher(contactOptions, g)){
+                    res2("Phone Number: 1-800-333-0061");
+                    res2("Location: 160-1876 Cooper Road, Kelowna, BC V1Y 9N6");
+                    res2("Email: ticketbookingsytem@gmail.com");
+                }           
+            
             
             if (count == 1) {
                 email = g;
