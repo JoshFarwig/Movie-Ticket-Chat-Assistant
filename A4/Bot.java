@@ -14,15 +14,27 @@ import org.kl.jpml.state.Else;
 public class Bot extends JFrame {
     private JTextArea Chatarea = new JTextArea();
     private JTextField chatbox = new JTextField();
-    private JButton b = new JButton("Book a ticket");
+    private JButton b = new JButton("Book a Ticket");
     private JButton b2 = new JButton("Amend your booking");
     private JButton b3 = new JButton("Cancel your booking");
     private JButton c = new JButton("Cancel");
     DBconnection db = new DBconnection(); 
+
     
+
     String g = "";
     int count = 0;
+    String custName = null;
+    char custGender = 0;
+    String movieName = null;
+    String custBdate = null;
+    String seat = null;
+    String email = "";
+    String confirm = "";
+    int mov = 0;
+    ActionEvent a;
 
+    
 public Bot(){
     //setting up JFrame
     res("Hi, how can I help you?");
@@ -45,7 +57,8 @@ public Bot(){
     JScrollPane sp = new JScrollPane(Chatarea, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED,JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
     frame.add(sp);
 
-    Chatarea.setSize(500,600);
+    Chatarea.setSize(500,600);  
+    Chatarea.setEditable(false);
     Chatarea.setLocation(2,2);
 
     chatbox.setSize(580,50);
@@ -61,19 +74,14 @@ public Bot(){
     b3.setLocation(402, 602);
 
     //Actions
-chatbox.addActionListener(new ActionListener() {
-            String custName = null;
-			char custGender = 0;
-			String movieName = null;
-            String custBdate = null;
-            String seat = null;
-            String email = "";
-            String confirm = "";
-            int mov = 0;
+
+    
+ chatbox.addActionListener(new ActionListener() {
+   
         @Override
-        public void actionPerformed(ActionEvent e) {
+        public void actionPerformed(ActionEvent a) {
             g = chatbox.getText();
-            Chatarea.append("You: " + g + "\n");
+            if (!g.equals("")){Chatarea.append("You: " + g + "\n");}
             chatbox.setText("");
             
             if (count == 1) {
@@ -110,10 +118,13 @@ chatbox.addActionListener(new ActionListener() {
                 else 
                 custGender = 'X';
                 count++;
+                b2.setVisible(true);
+                b.setText("Male");
+                b2.setText("Female");
             }
             else if (count == 3) {
-                custGender = g.charAt(0); 
-                res("Please enter your birth date: (yyyy-mm-dd)");
+                if (custGender == 0) {custGender = g.charAt(0); }
+                res("Please enter your birth date: (mm/dd/yyyy)");
                 count++;
             }
             else if (count == 4) {
@@ -154,26 +165,45 @@ chatbox.addActionListener(new ActionListener() {
 
                 }
             }
+
+            else if (count == 8){
+                
             }
-        }
+            } 
+        
+    }
     );
+
+
 //booking a ticket
 b.addActionListener(new ActionListener() {
-			
         @Override
         public void actionPerformed(ActionEvent e) {
             if (b.getText().equals("Cancel")){
-            
                 b.setText("Book a Ticket");
                 count = 0;
                 res("Returning to main menu.");
-                return;
+                b2.setVisible(true);
+                b3.setVisible(true);
             }
+            else if (b.getText().equals("Book a Ticket")){
             count++;
             b.setText("Cancel");
+            b2.setVisible(false);
+            b3.setVisible(false);
 
             res("Okay, I can help you with that. \nEnter your email: ");
             String email = g;
+            }
+            else if (b.getText().equals("Male")){
+            count = 3;
+            custGender = 'M';
+            b2.setText("Amend your booking");
+            b2.setVisible(false);
+            b.setText("Cancel");
+            
+
+            }
            }
         
         });
@@ -181,7 +211,20 @@ b.addActionListener(new ActionListener() {
 //amending a ticket
 b2.addActionListener(new ActionListener(){
         public void actionPerformed(ActionEvent e){
-
+            if(b2.getText().equals("Female")){
+                count = 3;
+                custGender = 'F';
+                b2.setText("Amend your booking");
+                b2.setVisible(false);
+                b.setText("Cancel");
+               
+            }
+            else if(b2.getText().equals("Amend your booking")){
+                b.setText("Cancel");
+                b2.setVisible(false);
+                b3.setVisible(false);
+                res("Sure, I can help you with that. Please enter your email: ");
+            }
         }
 });
 
