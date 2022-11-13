@@ -40,7 +40,7 @@ public Bot(){
     frame.setDefaultCloseOperation(EXIT_ON_CLOSE);
     frame.setVisible(true);
     frame.setResizable(false);
-    frame.setSize(600, 600);
+    frame.setSize(600, 800);
     frame.setTitle("Virtual Assistant");
    
    
@@ -55,21 +55,21 @@ public Bot(){
     JScrollPane sp = new JScrollPane(Chatarea, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED,JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
     frame.add(sp);
 
-    Chatarea.setSize(500,400);  
+    Chatarea.setSize(500,600);  
     Chatarea.setEditable(false);
     Chatarea.setLocation(2,2);
 
     chatbox.setSize(580,50);
-    chatbox.setLocation(2,474);
+    chatbox.setLocation(2,674);
 
     b.setSize(198,70);
-    b.setLocation(2, 402);
+    b.setLocation(2, 602);
 
     b2.setSize(198,70);
-    b2.setLocation(202, 402);
+    b2.setLocation(202, 602);
 
     b3.setSize(198,70);
-    b3.setLocation(402, 402);
+    b3.setLocation(402, 602);
 
     //Actions
 
@@ -86,7 +86,7 @@ public Bot(){
                 String [] listMovie = {"List all movies", "Recommedations", "Recommend movies", "Recommend", "All movies", "List movies"};
                 if(patternMatcher(listMovie, g)){
                     for (int i = 0; i < db.getAllMovies().size(); i++) {
-                        res2(i + 1 + ". " + db.getAllMovies().get(i) + " ");
+                        res2(i + 1 + ". " + db.getAllMovies().get(i).substring(0,db.getAllMovies().get(i).indexOf(",")) + " ");
                 }
                 }
                 
@@ -141,12 +141,25 @@ public Bot(){
                 res("Account created!");
                 res("Select a movie: ");
                 for (int i = 0; i < db.getAllMovies().size(); i++) {
-                        res2(i + 1 + ". " + db.getAllMovies().get(i) + " ");
+                        res2(db.getAllMovies().get(i) + " ");
+                }
+
+                String [] b_adam = {"Black Adam", "black adam", "black Adam"};
+                String [] smile =  {"Smile", "smile"}; 
+                String [] thor = {"Thor: Love and Thunder", "Thor Love and Thunder","Thor love and thunder", "thor love and thunder", "Thor", "thor"};
+                
+                if(patternMatcher(b_adam, g)){
+                    mov =1;
+                }
+                else if (patternMatcher(smile, g)){
+                    mov =2;
+                }
+                else if (patternMatcher(thor, g)){
+                    mov =3;
                 }
                 count++;
             }
             else if (count == 5) {
-                mov = Integer.parseInt(g);
                 movieName = db.getAllMovies().get(mov-1).substring(0,db.getAllMovies().get(mov-1).indexOf(',')).toString();
                 res("Select your seat: ");
                 res2(db.showAvailableSeats(db.getAllMovies().get(mov).substring(0,db.getAllMovies().get(mov).indexOf(','))).toString());
