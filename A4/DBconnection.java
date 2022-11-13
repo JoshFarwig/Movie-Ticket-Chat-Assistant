@@ -213,41 +213,5 @@ public class DBconnection {
     
     }
 
-   /*public ArrayList<String> showAllAddons(){ 
-        ArrayList<String> output = new ArrayList<>();  
-        try {   
-            PreparedStatement pstmt = con.prepareStatement("SELECT srowcol FROM seat WHERE cemail IS NULL and mname = ?");   
-            pstmt.setString(1,);
-            ResultSet rs = pstmt.executeQuery(); 
-            while(rs.next()) { 
-                output.add(String.format("%s",rs.getString("srowcol"))); 
-            } 
-            return output; 
-        } catch (SQLException e){ 
-            System.out.println(e);    
-            output.add("Unable to generate seat data..."); 
-            return output; 
-        }
-    } 
-
-    public void showCustomerAddons(){ 
-
-    }
-
-    public void addToCart() { 
-
-
-    } 
-
-    public void deleteFromCart() { 
-
-
-    } 
-
-
-    public void printTicketSummary(){
-
-    }
-    */
     
 }
