@@ -2,7 +2,7 @@
 # Movie Virtual Assistant 
 ## Project Description:
 
-A virtual assistant that allows for customers to book/change/cancel new or current movie ticket bookings, as well as allow users to purchase add-ons such as food, drinks, and movie collectibles.
+A virtual assistant that allows for customers to book/change/cancel new or current movie ticket bookings. After confirming their booking, the customer gets their ticket sent to them via email. The entire project was developed using Java and utilized libraries such as JDBC, JSwing, Java AWT, and Java Mail for our features. We went with a simple, straight-forward design for our assistant's user interface. The user has two input options, either by directly typing into the chatbox or by clicking one of the buttons right above it. After the user has finished their interaction and their request was met, they receive a confirmation email of the interaction via the email on file.    
 
 ## Class Organization: 
 ### Implemented 
