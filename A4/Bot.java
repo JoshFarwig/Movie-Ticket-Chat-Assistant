@@ -73,8 +73,6 @@ public Bot(){
     b3.setLocation(402, 602);
 
     //Actions
-
-    
  chatbox.addActionListener(new ActionListener() {
    
         @Override
@@ -198,7 +196,7 @@ public Bot(){
             else if (count == 7) {
                 confirm = g;
                 if (confirm.equals("y")){
-                    db.createMovieTicket(email, movieName, seat, "");
+                    db.createMovieTicket(email, movieName, seatid, "");
                     Email send = new Email(email,"Movie Booking Confirmation", "Thank you for your order! Your ticket ID is : " + db.getMovieTicketID(email) + "\nOrder Summary\nCustomer Information\n\tName: " + custName + "\n\tEmail: " + email + "\n\tGender: " + custGender + "\nBooking Confirmation\n\tMovie Name: " + movieName + "\nMovie Time: " + "\nYour Selected Seat: " + seat);
                     res("The receipt has been sent to your email.");
                     b.setVisible(true);
@@ -261,7 +259,6 @@ public Bot(){
     }
     );
 
-
 //booking a ticket
 b.addActionListener(new ActionListener() {
         @Override
@@ -317,7 +314,7 @@ b.addActionListener(new ActionListener() {
             else if(b.getText().equals("Yes")){
                 confirm = "y";
                 count = 7;
-                db.createMovieTicket(email, movieName, seat, "");
+                db.createMovieTicket(email, movieName, seatid, "");
                     Email send = new Email(email,"Movie Booking Confirmation", "Thank you for your order! Your ticket ID is : " + db.getMovieTicketID(email) + "\nOrder Summary\nCustomer Information\n\tName: " + custName + "\n\tEmail: " + email + "\n\tGender: " + custGender + "\nBooking Confirmation\n\tMovie Name: " + movieName + "\nMovie Time: " + "\nYour Selected Seat: " + seat);
                     res("The receipt has been sent to your email.");
                     res2("Can I help you with anything else?");
@@ -389,29 +386,18 @@ b3.addActionListener(new ActionListener(){
 });
 
 
-
 }
-
-
-private void res(String string){
-    Chatarea.append("Sally: " + string + "\n");
-}
-private void res2(String string){
-    Chatarea.append(string + "\n");
-}
-
-
-
-public static void main(String[] args) {
-    new Bot();
-    
-}
-
-
-public boolean patternMatcher(String[] pattern, String input){
-    
-return Arrays.stream(pattern).anyMatch(input::contains);
-
-}
+    private void res(String string){
+        Chatarea.append("Sally: " + string + "\n");
+    }
+    private void res2(String string) {
+        Chatarea.append(string + "\n");
+    }
+    public static void main(String[] args) {
+        new Bot(); 
+    }
+    public boolean patternMatcher(String[] pattern, String input){  
+        return Arrays.stream(pattern).anyMatch(input::contains);
+    }   
 }
 
