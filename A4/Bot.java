@@ -35,7 +35,7 @@ public class Bot extends JFrame {
     
 public Bot(){
     //setting up JFrame
-    res("Hi, how can I help you?");
+    Chatarea.setText("Sally: Hi, how can I help you? \n");
     JFrame frame = new JFrame();
     frame.setDefaultCloseOperation(EXIT_ON_CLOSE);
     frame.setVisible(true);
