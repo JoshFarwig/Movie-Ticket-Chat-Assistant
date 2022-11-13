@@ -8,7 +8,6 @@ import java.util.GregorianCalendar;
 import java.util.Scanner;
 import static org.kl.jpml.pattern.ConstantPattern.*;
 import javax.swing.*;
-import org.apache.commons.lang.StringUtils;
 import org.kl.jpml.state.Else;
 
 
