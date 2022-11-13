@@ -70,16 +70,16 @@ public class DBconnection {
         }
     }
 
-    public void createMovieTicket(String email, String movie, String seatpos, String movietime) {  
+    public void createMovieTicket(String email, String movie, String seatID, String movietime) {  
         try{   
             PreparedStatement getMoviecost = con.prepareStatement("SELECT cost FROM movie WHERE name = ?"); 
             getMoviecost.setString(1, movie); 
             ResultSet rs = getMoviecost.executeQuery();  rs.next();  
             double cost = rs.getDouble("cost"); 
-            PreparedStatement pstmt = con.prepareStatement("INSERT INTO movieticket(cemail, mname, seatpos, movtime, totalPrice) VALUES(?, ?, ?, ?, ?)"); 
+            PreparedStatement pstmt = con.prepareStatement("INSERT INTO movieticket(cemail, mname, seatID, movtime, totalPrice) VALUES(?, ?, ?, ?, ?)"); 
             pstmt.setString(1, email);  
             pstmt.setString(2, movie);   
-            pstmt.setString(3, seatpos);  
+            pstmt.setString(3, seatID);  
             pstmt.setString(4, movietime); 
             pstmt.setDouble(5, cost);  
             pstmt.execute(); 
