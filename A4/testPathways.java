@@ -18,7 +18,7 @@ import org.junit.Test;
 /**
  * Tests bot database program.
  */
-public class testAccountCreation {
+public class testPathways {
  /**
 	 * Class being tested
 	 */
@@ -51,6 +51,10 @@ public class testAccountCreation {
 	 */
 	
      @Test
-     public void testAccountCreation() throws SQLException
+     public void testAccountCreation() throws SQLException{
+
+	 }
+
+	 																																																							
 	
 }
