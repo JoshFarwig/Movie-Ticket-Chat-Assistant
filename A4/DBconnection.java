@@ -50,7 +50,7 @@ public class DBconnection {
         try{ 
             PreparedStatement pstmt = con.prepareStatement("SELECT gender FROM customer WHERE email = ?"); 
             pstmt.setString(1, email); 
-            ResultSet rs = rs.executeQuery(); rs.next(); 
+            ResultSet rs = pstmt.executeQuery(); rs.next(); 
             return rs.getString("gender");
         } catch (SQLException e) {
             System.out.println(e); 
@@ -62,7 +62,7 @@ public class DBconnection {
           try{ 
             PreparedStatement pstmt = con.prepareStatement("SELECT name FROM customer WHERE email = ?"); 
             pstmt.setString(1, email); 
-            ResultSet rs = rs.executeQuery(); rs.next(); 
+            ResultSet rs = pstmt.executeQuery(); rs.next(); 
             return rs.getString("name");
         } catch (SQLException e) {
             System.out.println(e); 
@@ -70,16 +70,16 @@ public class DBconnection {
         }
     }
 
-    public void createMovieTicket(String email, String movie, String seatpos, String movietime) {  
+    public void createMovieTicket(String email, String movie, String seatID, String movietime) {  
         try{   
             PreparedStatement getMoviecost = con.prepareStatement("SELECT cost FROM movie WHERE name = ?"); 
             getMoviecost.setString(1, movie); 
             ResultSet rs = getMoviecost.executeQuery();  rs.next();  
             double cost = rs.getDouble("cost"); 
-            PreparedStatement pstmt = con.prepareStatement("INSERT INTO movieticket(cemail, mname, seatpos, movtime, totalPrice) VALUES(?, ?, ?, ?, ?)"); 
+            PreparedStatement pstmt = con.prepareStatement("INSERT INTO movieticket(cemail, mname, seatID, movtime, totalPrice) VALUES(?, ?, ?, ?, ?)"); 
             pstmt.setString(1, email);  
             pstmt.setString(2, movie);   
-            pstmt.setString(3, seatpos);  
+            pstmt.setString(3, seatID);  
             pstmt.setString(4, movietime); 
             pstmt.setDouble(5, cost);  
             pstmt.execute(); 
@@ -199,13 +199,13 @@ public class DBconnection {
         }
     }   
     
-    public String getSeatPos(String email, String movie) {  
+    public String getSeatID(String email, String movie) {  
         try { 
-            PreparedStatement pstmt = con.prepareStatement("SELECT srowcol FROM seat WHERE cemail = ? and mname = ?"); 
+            PreparedStatement pstmt = con.prepareStatement("SELECT sid FROM seat WHERE cemail = ? and mname = ?"); 
             pstmt.setString(1, email); 
             pstmt.setString(2, movie); 
             ResultSet rs = pstmt.executeQuery(); rs.next();
-            return rs.getString("srowcol");
+            return rs.getString("sid");
         } catch (SQLException e) { 
             System.out.println(e);
             return "no seat found";
@@ -213,41 +213,5 @@ public class DBconnection {
     
     }
 
-   /*public ArrayList<String> showAllAddons(){ 
-        ArrayList<String> output = new ArrayList<>();  
-        try {   
-            PreparedStatement pstmt = con.prepareStatement("SELECT srowcol FROM seat WHERE cemail IS NULL and mname = ?");   
-            pstmt.setString(1,);
-            ResultSet rs = pstmt.executeQuery(); 
-            while(rs.next()) { 
-                output.add(String.format("%s",rs.getString("srowcol"))); 
-            } 
-            return output; 
-        } catch (SQLException e){ 
-            System.out.println(e);    
-            output.add("Unable to generate seat data..."); 
-            return output; 
-        }
-    } 
-
-    public void showCustomerAddons(){ 
-
-    }
-
-    public void addToCart() { 
-
-
-    } 
-
-    public void deleteFromCart() { 
-
-
-    } 
-
-
-    public void printTicketSummary(){
-
-    }
-    */
     
 }
