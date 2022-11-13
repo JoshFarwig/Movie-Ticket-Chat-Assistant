@@ -19,8 +19,8 @@ CREATE TABLE customer (
 CREATE TABLE movie ( 
     name varchar(30), 
     genre varchar(20), 
-    releasedate date, 
-    duration time,   
+    dateofmovie varchar(20), 
+    timeofmovie varchar(20),    
     cost decimal(8,2),
     PRIMARY KEY(name)
 ); 
@@ -71,9 +71,9 @@ CREATE TABLE seat(
     FOREIGN KEY(cemail) references customer(email)
 ); 
 
-INSERT INTO movie VALUES('Black Adam', 'Action', '2022-10-3', '01:30:00', 22.25); 
-INSERT INTO movie VALUES('Smile', 'Horror', '2022-11-10', '2:30:00', 15.75); 
-INSERT INTO movie VALUES('Thor: Love and Thunder','Action/Comedy', '2022-6-22', '02:15:00', 20.50);   
+INSERT INTO movie VALUES('Black Adam', 'Action', '11/15/2022', '3:30pm', 22.25); 
+INSERT INTO movie VALUES('Smile', 'Horror', '11/17/2022', '5:00pm', 15.75); 
+INSERT INTO movie VALUES('Thor: Love and Thunder','Action/Comedy', '11/19/2022', '9:15pm', 20.50);   
 
 /* INSERT INTO movietimes VALUES('11/15/2022 11:30am', 'Black Adam');  
 INSERT INTO movietimes VALUES('11/15/2022 1:30pm', 'Black Adam');   
