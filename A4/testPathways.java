@@ -97,8 +97,9 @@ public class testPathways {
 		dbcon.deleteMovieTicket("osho@gmail.com", "Smile");
 		StringBuilder output = new StringBuilder();
 
-        String returnStudents = "SELECT cemail from movieticket";
-        PreparedStatement pstmt = con1.prepareStatement(returnStudents); 
+        String returnStudents = "SELECT cemail from movieticket WHERE cemail = ?";
+        PreparedStatement pstmt = con1.prepareStatement(returnStudents);  
+	pstmt.setString(1, "osho@gmail.com");
         ResultSet rst = pstmt.executeQuery();
         output.append("cemail\n");
         while(rst.next()){
