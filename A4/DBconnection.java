@@ -76,12 +76,11 @@ public class DBconnection {
             getMoviecost.setString(1, movie); 
             ResultSet rs = getMoviecost.executeQuery();  rs.next();  
             double cost = rs.getDouble("cost"); 
-            PreparedStatement pstmt = con.prepareStatement("INSERT INTO movieticket(cemail, mname, seatID, movtime, totalPrice) VALUES(?, ?, ?, ?, ?)"); 
+            PreparedStatement pstmt = con.prepareStatement("INSERT INTO movieticket(cemail, mname, seatID, totalPrice) VALUES(?, ?, ?, ?)"); 
             pstmt.setString(1, email);  
             pstmt.setString(2, movie);   
             pstmt.setInt(3, seatID);  
-            pstmt.setString(4, movietime); 
-            pstmt.setDouble(5, cost);  
+            pstmt.setDouble(4, cost);  
             pstmt.execute(); 
         } catch (SQLException e) {
             System.out.println(e);
@@ -90,26 +89,15 @@ public class DBconnection {
      
     public String showMovieTicket(int movieticketid) {  
         try{   
-            PreparedStatement pstmt = con.prepareStatement("SELECT mt.mtid, m.name, m.dateofmovie, m.timeofmovie, s.rowcol, mt.totalPrice FROM movieticket mt JOIN movie m ON mt.mname = m.name JOIN seat s ON mt.seatID = s.sid WHERE mtid = ?"); 
+            PreparedStatement pstmt = con.prepareStatement("SELECT mt.mtid, m.name, m.dateofmovie, m.timeofmovie, s.srowcol, mt.totalPrice FROM movieticket mt JOIN movie m ON mt.mname = m.name JOIN seat s ON mt.seatID = s.sid WHERE mtid = ?"); 
             pstmt.setInt(1, movieticketid);  
             ResultSet rs = pstmt.executeQuery(); rs.next();  
-            return String.format("TicketID: %d, Movie: %s Date: %s Time: %s Seat: %s Ticket Cost: %d", rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getDouble(6)); 
+            return String.format("TicketID: %d, Movie: %s Date: %s Time: %s Seat: %s Ticket Cost: %f", rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getDouble(6)); 
         } catch (SQLException e) {
             System.out.println(e); 
             return "You do not have a movieticket!";
         } 
     }  
-
-    public void updateMovieInTicket(int movieticketid, String movie) { 
-        try{   
-            PreparedStatement pstmt = con.prepareStatement("UPDATE movieticket SET mname = ? WHERE mtid = ?"); 
-            pstmt.setString(2, movie);
-            pstmt.setInt(2, movieticketid);  
-            pstmt.execute(); 
-        } catch (SQLException e) {
-            System.out.println(e); 
-        } 
-    }
 
     public void updateSeatInTicket(int movieticketid, int seatid) { 
         try{   
@@ -151,7 +139,7 @@ public class DBconnection {
             Statement stmt = con.createStatement();   
             ResultSet rs = stmt.executeQuery("SELECT * FROM movie");  
             while(rs.next()) { 
-                output.add(String.format("%s, Genre: %s, ReleaseDate: %s, Movie Duration: %s",rs.getString("name"),rs.getString("genre"),rs.getString("releasedate"), rs.getString("duration"))); 
+                output.add(String.format("%s, Genre: %s, Date: %s, Time: %s",rs.getString("name"),rs.getString("genre"),rs.getString("dateofmovie"), rs.getString("timeofmovie"))); 
             } 
             return output; 
         } catch (SQLException e){ 
@@ -159,7 +147,6 @@ public class DBconnection {
             output.add("Unable to generate movie data..."); 
             return output; 
         }
-
     }  
     
     public ArrayList<String> getMovieTimes(String movie) {  
@@ -231,6 +218,4 @@ public class DBconnection {
         }
     
     }
-
-    
 }

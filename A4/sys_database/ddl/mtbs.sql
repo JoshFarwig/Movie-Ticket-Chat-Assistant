@@ -23,6 +23,16 @@ CREATE TABLE movie (
     timeofmovie varchar(20),    
     cost decimal(8,2),
     PRIMARY KEY(name)
+);  
+
+CREATE TABLE seat( 
+    sid int, 
+    srowcol char(2),
+    mname varchar(30),  
+    cemail varchar(30),   
+    PRIMARY KEY(sid), 
+    FOREIGN KEY(mname) references movie(name),  
+    FOREIGN KEY(cemail) references customer(email)
 ); 
 
 CREATE TABLE movieticket(  
@@ -32,8 +42,8 @@ CREATE TABLE movieticket(
     seatID int,
     totalPrice decimal(8,2),
     PRIMARY KEY(mtid), 
-    FOREIGN KEY(seatID) references seat(id)
-);
+    FOREIGN KEY(seatID) references seat(sid)
+);  
 
 /* CREATE TABLE movietimes(
     movietime varchar(30),  
@@ -60,16 +70,6 @@ CREATE TABLE inCart(
     FOREIGN KEY(cemail) references customer(email), 
     FOREIGN KEY(ticketid) references movieticket(mtid)
 ); */
-
-CREATE TABLE seat( 
-    sid int, 
-    srowcol char(2),
-    mname varchar(30),  
-    cemail varchar(30),   
-    PRIMARY KEY(sid), 
-    FOREIGN KEY(mname) references movie(name),  
-    FOREIGN KEY(cemail) references customer(email)
-); 
 
 INSERT INTO movie VALUES('Black Adam', 'Action', '11/15/2022', '3:30pm', 22.25); 
 INSERT INTO movie VALUES('Smile', 'Horror', '11/17/2022', '5:00pm', 15.75); 
