@@ -114,11 +114,13 @@ public class testPathways {
 
 	 @Test
 	 public void testAmendTicket() throws SQLException{
-		dbcon = new DBconnection();
+		dbcon = new DBconnection(); 
+		StringBuilder output = new StringBuilder();
+
 		
-		dbcon.createMovieTicket("osho@gmail.com", "Smile", 13, null );
+		dbcon.createMovieTicket("osho@gmail.com", "Smile", 13, null);
 		dbcon.chooseSeat("osho@gmail.com", "Smile", "A1");
-		dbcon.createMovieTicket("chinmay@gmail.com", "Smile", 14, null );
+		dbcon.createMovieTicket("chinmay@gmail.com", "Smile", 14, null);
 		dbcon.chooseSeat("chinmay@gmail.com", "Smile", "A2");
 
 		dbcon.unselectSeat(13);
@@ -127,29 +129,25 @@ public class testPathways {
 		dbcon.deleteMovieTicket("osho@gmail.com", "Smile");
 		dbcon.deleteMovieTicket("chinmay@gmail.com", "Smile");
 
-		dbcon.createMovieTicket("osho@gmail.com", "Smile", 14, null );
+		dbcon.createMovieTicket("osho@gmail.com", "Smile", 14, null);
 		dbcon.chooseSeat("osho@gmail.com", "Smile", "A2");
-		dbcon.createMovieTicket("chinmay@gmail.com", "Smile", 13, null );
+		dbcon.createMovieTicket("chinmay@gmail.com", "Smile", 13, null);
 		dbcon.chooseSeat("chinmay@gmail.com", "Smile", "A1");
 
 
-		
-		StringBuilder output = new StringBuilder();
-
-        String returnStudents = "SELECT cemail, seatID from movieticket";
-        PreparedStatement pstmt = con1.prepareStatement(returnStudents); 
-        ResultSet rst = pstmt.executeQuery();
-        output.append("cemail, seatID\n");
-        while(rst.next()){
-            output.append(rst.getString("cemail") + ", " + rst.getInt("seatID") + "\n");
-        }
-		output.deleteCharAt(output.length() - 1);
-        String result = output.toString();
+		String returnIds = "SELECT cemail, seatID from movieticket";
+		PreparedStatement pstmt = con1.prepareStatement(returnIds); 
+		ResultSet rst = pstmt.executeQuery();
+		output.append("cemail, seatID\n");
+		while(rst.next()){
+		    output.append(rst.getString("cemail") + ", " + rst.getInt("seatID") + "\n");
+		}
+			output.deleteCharAt(output.length() - 1);
+		String result = output.toString();
 		String answer = "cemail, seatID" + 
 						"\nosho@gmail.com, 14" +
 						"\nchinmay@gmail.com, 13";
-						
-						assertEquals(answer, result);
+		assertEquals(answer, result);
         
 	 }
 
