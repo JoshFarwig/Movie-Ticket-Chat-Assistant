@@ -116,12 +116,26 @@ public class testPathways {
 	 public void testAmendTicket() throws SQLException{
 		dbcon = new DBconnection(); 
 		StringBuilder output = new StringBuilder();
-
+		StringBuilder output2 = new StringBuilder();
 		
 		dbcon.createMovieTicket("osho@gmail.com", "Smile", 13, null);
 		dbcon.chooseSeat("osho@gmail.com", "Smile", "A1");
 		dbcon.createMovieTicket("chinmay@gmail.com", "Smile", 14, null);
-		dbcon.chooseSeat("chinmay@gmail.com", "Smile", "A2");
+		dbcon.chooseSeat("chinmay@gmail.com", "Smile", "A2"); 
+		 
+		String returnIds = "SELECT cemail, seatID from movieticket";
+		PreparedStatement pstmt = con1.prepareStatement(returnIds); 
+		ResultSet rst = pstmt.executeQuery();
+		output.append("cemail, seatID\n");
+		while(rst.next()){
+		    output.append(rst.getString("cemail") + ", " + rst.getInt("seatID") + "\n");
+		}
+			output.deleteCharAt(output.length() - 1);
+		String result = output.toString();
+		String answer = "cemail, seatID" + 
+						"\nosho@gmail.com, 13" +
+						"\nchinmay@gmail.com, 14";
+		assertEquals(answer, result);
 
 		dbcon.unselectSeat(13);
 		dbcon.unselectSeat(14);
@@ -135,19 +149,18 @@ public class testPathways {
 		dbcon.chooseSeat("chinmay@gmail.com", "Smile", "A1");
 
 
-		String returnIds = "SELECT cemail, seatID from movieticket";
-		PreparedStatement pstmt = con1.prepareStatement(returnIds); 
-		ResultSet rst = pstmt.executeQuery();
+		PreparedStatement pstmt2 = con1.prepareStatement(returnIds); 
+		ResultSet rst2 = pstmt2.executeQuery();
 		output.append("cemail, seatID\n");
-		while(rst.next()){
-		    output.append(rst.getString("cemail") + ", " + rst.getInt("seatID") + "\n");
+		while(rst2.next()){
+		    output2.append(rst2.getString("cemail") + ", " + rst2.getInt("seatID") + "\n");
 		}
-			output.deleteCharAt(output.length() - 1);
-		String result = output.toString();
-		String answer = "cemail, seatID" + 
+			output2.deleteCharAt(output2.length() - 1);
+		String result2 = output2.toString();
+		String answer2 = "cemail, seatID" + 
 						"\nosho@gmail.com, 14" +
 						"\nchinmay@gmail.com, 13";
-		assertEquals(answer, result);
+		assertEquals(answer2, result2);
         
 	 }
 
