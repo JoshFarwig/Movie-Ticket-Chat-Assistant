@@ -5,6 +5,7 @@ public class DBconnection {
     
   
     Connection con = null;  
+    
     public DBconnection(){  
        
         String url = "jdbc:mysql://localhost/mtbs";
@@ -33,13 +34,14 @@ public class DBconnection {
         } 
     }  
 
-    public void createCustomer(String name, String gender, String email, String bdate) { 
+    public void createCustomer(String name, String gender, String email, String phone, String bdate) { 
         try{ 
-            PreparedStatement pstmt = con.prepareStatement("INSERT INTO customer(name, gender, email, bdate) VALUES(?, ?, ?, ?)"); 
-            pstmt.setString(1, name);  
-            pstmt.setString(2, gender);  
-            pstmt.setString(3, email);    
-            pstmt.setString(4, bdate); 
+            PreparedStatement pstmt = con.prepareStatement("INSERT INTO customer VALUES(?, ?, ?, ?, ?)"); 
+            pstmt.setString(1, email);  
+            pstmt.setString(2, name);  
+            pstmt.setString(3, gender);    
+            pstmt.setString(4, phone);  
+            pstmt.setString(5, bdate); 
             pstmt.execute(); 
         } catch (SQLException e) {
             System.out.println(e);

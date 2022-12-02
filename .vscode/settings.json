@@ -6,6 +6,9 @@
         "A4/libs/mssql-jdbc-11.2.0.jre11.jar",
         "A4/libs/mysql-connector-java-8.0.27.jar",
         "/Users/cjain/Downloads/glassfish5/glassfish/modules/javax.mail.jar",
-        "/Users/cjain/Downloads/jaf-1.1.1/activation.jar"
+        "/Users/cjain/Downloads/jaf-1.1.1/activation.jar",
+        "A4/libs/activation.jar",
+        "A4/libs/javax.mail.jar",
+        "A4/libs/twilio-9.1.4-jar-with-dependencies.jar"
     ]
 }
