@@ -4,7 +4,7 @@ import java.util.*;
 
 public class Email {
 	final String senderEmail = "ticketbookingsystem.noreply"; //change email address
-	final String senderPassword = "nndcfrfrkpxthlgc"; //change password
+	final String senderPassword = ""; //change password
 	final String emailSMTPserver = "smtp.gmail.com";
 	final String emailServerPort = "465";
 	String receiverEmail = null;
